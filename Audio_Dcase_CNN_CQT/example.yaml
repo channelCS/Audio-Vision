@@ -1,0 +1,13 @@
+cqt:
+    fs:
+    - 44100.  
+    hop_length:
+    - 512
+    n_bins:
+    - 120
+    mono:
+    - True
+    bins_per_octave:
+    - 24
+    window:
+    - 'hamming'
