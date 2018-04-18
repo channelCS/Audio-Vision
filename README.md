@@ -3,4 +3,4 @@
 
 Implementation and reviews of Audio & Computer vision related papers in `python`.
 
-1. Deep Neural Network Baseline For Dcase Challenge 2016 [[Paper](http:/&&www.cs.tut.fi/sgn/arg/dcase2016/documents/challenge_technical_reports/DCASE2016_Kong_3008.pdf)] [[Implementation](https://github.com/channelCS/Summaries/tree/master/Audio_Dcase_DNN_Baseline)] 
+1. Deep Neural Network Baseline For Dcase Challenge 2016 [[Paper](http://www.cs.tut.fi/sgn/arg/dcase2016/documents/challenge_technical_reports/DCASE2016_Kong_3008.pdf)] [[Implementation](https://github.com/channelCS/Summaries/tree/master/Audio_Dcase_DNN_Baseline)] 
