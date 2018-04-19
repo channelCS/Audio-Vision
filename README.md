@@ -20,3 +20,6 @@ Implementation and reviews of Audio & Computer vision related papers in `python`
 ```diff
 - Application
 ```
+[1] Digit classifier [paper] [implementation] [[Application](https://github.com/channelCS/digit-identify)] 
+
+[2] MNIST Random Digit Regenerator [paper] [Implementation] [[Application](https://github.com/channelCS/image-generate)]
