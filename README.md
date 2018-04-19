@@ -5,7 +5,7 @@
 + Implementation & Reviews
 ```
 
-Implementation and reviews of Audio & Computer vision related papers in `python`.
+**Implementation and reviews of Audio & Computer vision related papers in `python`.**
 
 [1] Deep Neural Network Baseline For Dcase Challenge 2016 [[Paper](http://www.cs.tut.fi/sgn/arg/dcase2016/documents/challenge_technical_reports/DCASE2016_Kong_3008.pdf)] [[Implementation](https://github.com/channelCS/Summaries/tree/master/Audio_Dcase_DNN_Baseline)] 
 
@@ -20,6 +20,8 @@ Implementation and reviews of Audio & Computer vision related papers in `python`
 ```diff
 - Application
 ```
+**Application Deployed using heroku and Flask with python and JS**
+
 [1] Digit classifier [paper] [implementation] [[Application](https://github.com/channelCS/digit-identify)] 
 
 [2] MNIST Random Digit Regenerator [paper] [Implementation] [[Application](https://github.com/channelCS/image-generate)]
