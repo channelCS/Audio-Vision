@@ -1,0 +1,21 @@
+logmel:
+    fs:
+    - 44100.  
+    n_mels:
+    - 40
+    fmin:
+    - 0.
+    fmax:
+    - 22100
+    mono:
+    - True
+    hamming_window:
+    - 1024.
+    noverlap:
+    - 0
+    detrend:
+    - False
+    return_onesided:
+    - True
+    mode:
+    - 'magnitude'
