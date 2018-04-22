@@ -13,11 +13,11 @@
 
 [3] A convolutional neural network approach for acoustic scene classification [[Paper](http://ieeexplore.ieee.org/abstract/document/7966035/)] [[Implementation](https://github.com/channelCS/Summaries/tree/master/Audio_Dcase_DNN_Baseline)] 
 
-[4] Very Deep Convolutional Networks for End-to-end Speech Recognition [[Paper](https://arxiv.org/pdf/1610.03022.pdf)] [[Implementation](https://github.com/channelCS/Summaries/tree/master/Audio_Dcase_DNN_Baseline)] 
+~~[4] Very Deep Convolutional Networks for End-to-end Speech Recognition [[Paper](https://arxiv.org/pdf/1610.03022.pdf)] [[Implementation](https://github.com/channelCS/Summaries/tree/master/Audio_Dcase_DNN_Baseline)]~~
 
-[5] Convolutional Recurrent Neural Networks for Polyphonic Sound Event Detection [[Paper](https://arxiv.org/pdf/1702.06286.pdf)] [[Implementation](https://github.com/channelCS/Summaries/tree/master/Audio_Dcase_DNN_Baseline)] 
+[4] Convolutional Recurrent Neural Networks for Polyphonic Sound Event Detection [[Paper](https://arxiv.org/pdf/1702.06286.pdf)] [[Implementation](https://github.com/channelCS/Summaries/tree/master/Audio_Dcase_DNN_Baseline)] 
 
-[6] FrameCNN: A Weakly-Supervised Learning Framework for Frame-Wise Acoustic Event Detection and Classification [paper][Implementation]
+[5] FrameCNN: A Weakly-Supervised Learning Framework for Frame-Wise Acoustic Event Detection and Classification [paper][Implementation]
 
 ```diff
 - Application
