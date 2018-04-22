@@ -17,6 +17,8 @@
 
 [5] Convolutional Recurrent Neural Networks for Polyphonic Sound Event Detection [[Paper](https://arxiv.org/pdf/1702.06286.pdf)] [[Implementation](https://github.com/channelCS/Summaries/tree/master/Audio_Dcase_DNN_Baseline)] 
 
+[6] FrameCNN: A Weakly-Supervised Learning Framework for Frame-Wise Acoustic Event Detection and Classification [paper][Implementation]
+
 ```diff
 - Application
 ```
