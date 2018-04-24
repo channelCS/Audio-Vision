@@ -19,6 +19,8 @@
 
 [5] FrameCNN: A Weakly-Supervised Learning Framework for Frame-Wise Acoustic Event Detection and Classification [paper][Implementation]
 
+[6] Sequence to Sequence Autoencoders for Unsupervised Representation Learning From Audio [[Paper](https://www.cs.tut.fi/sgn/arg/dcase2017/documents/workshop_papers/DCASE2017Workshop_Amiriparian_172.pdf)][Implementation]
+
 ```diff
 - Application
 ```
