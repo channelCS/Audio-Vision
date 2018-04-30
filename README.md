@@ -21,6 +21,8 @@
 
 [6] Sequence to Sequence Autoencoders for Unsupervised Representation Learning From Audio [[Paper](https://www.cs.tut.fi/sgn/arg/dcase2017/documents/workshop_papers/DCASE2017Workshop_Amiriparian_172.pdf)][Implementation]
 
+[7]Attention and Localization based on a Deep Convolutional Recurrent Model for Weakly Supervised Audio Tagging [[Paper](https://arxiv.org/pdf/1703.06052.pdf)][Implementation] 
+
 ```diff
 - Application
 ```
