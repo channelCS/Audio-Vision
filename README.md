@@ -15,17 +15,17 @@
 
 [4] Convolutional Recurrent Neural Networks for Polyphonic Sound Event Detection [[Paper](https://arxiv.org/pdf/1702.06286.pdf)] [[Implementation](https://github.com/akshitac8/Summaries/tree/master/CRNN)] 
 
-[5] FrameCNN: A Weakly-Supervised Learning Framework for Frame-Wise Acoustic Event Detection and Classification [[paper](https://www.cs.tut.fi/sgn/arg/dcase2017/documents/challenge_technical_reports/DCASE2017_Chou_102.pdf)][[Implementation](https://github.com/akshitac8/Summaries/tree/master/FrameCNN)]
+[5] FrameCNN: A Weakly-Supervised Learning Framework for Frame-Wise Acoustic Event Detection and Classification [[Paper](https://www.cs.tut.fi/sgn/arg/dcase2017/documents/challenge_technical_reports/DCASE2017_Chou_102.pdf)][[Implementation](https://github.com/akshitac8/Summaries/tree/master/FrameCNN)]
 
 [6] Sequence to Sequence Autoencoders for Unsupervised Representation Learning From Audio [[Paper](https://www.cs.tut.fi/sgn/arg/dcase2017/documents/workshop_papers/DCASE2017Workshop_Amiriparian_172.pdf)][[Implementation](https://github.com/akshitac8/Summaries/tree/master/seq2seq_RNN)]
 
-[7]Attention and Localization based on a Deep Convolutional Recurrent Model for Weakly Supervised Audio Tagging [[Paper](https://arxiv.org/pdf/1703.06052.pdf)][[Implementation](https://github.com/akshitac8/Summaries/tree/master/ATT-CGRNN)] 
+[7] Attention and Localization based on a Deep Convolutional Recurrent Model for Weakly Supervised Audio Tagging [[Paper](https://arxiv.org/pdf/1703.06052.pdf)][[Implementation](https://github.com/akshitac8/Summaries/tree/master/ATT-CGRNN)] 
 
 ```diff
 - Application
 ```
 **Application Deployed using heroku and Flask with python and JS**
 
-[1] Digit classifier [paper] [implementation] [[Application](https://github.com/channelCS/digit-identify)] 
+[1] Digit classifier [Paper] [implementation] [[Application](https://github.com/channelCS/digit-identify)] 
 
-[2] MNIST Random Digit Regenerator [paper] [Implementation] [[Application](https://github.com/channelCS/image-generate)]
+[2] MNIST Random Digit Regenerator [Paper] [Implementation] [[Application](https://github.com/channelCS/image-generate)]
