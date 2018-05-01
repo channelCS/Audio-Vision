@@ -1,11 +1,13 @@
 # Attention and Localization based on a Deep Convolutional Recurrent Model for Weakly Supervised Audio Tagging
 
 *- Yong Xu, Qiuqiang Kong, Qiang Huang, Wenwu Wang, Mark D. Plumbley*
+
 ## Model
 
 The Model explained here uses CNN-RNN with attention and localization
 
-<img src = " " width=738>
+<img src = "https://github.com/akshitac8/Summaries/blob/master/ATT-CGRNN/att.png">
+
 ## Dependenices
 This implementation uses Python 2.7, Keras 2.1 and Scikit Learn. The code works on Theano backend.
 ```
