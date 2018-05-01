@@ -2,6 +2,10 @@
 
 *- Yong Xu, Qiuqiang Kong, Qiang Huang, Wenwu Wang, Mark D. Plumbley*
 ## Model
+
+The Model explained here uses CNN-RNN with attention and localization
+
+<img src = " " width=738>
 ## Dependenices
 This implementation uses Python 2.7, Keras 2.1 and Scikit Learn. The code works on Theano backend.
 ```
