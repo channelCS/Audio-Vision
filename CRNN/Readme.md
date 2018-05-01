@@ -1,6 +1,7 @@
-# Deep Neural Network Baseline For Dcase Challenge 2016
+<h2> Convolutional Recurrent Neural Networks for Polyphonic Sound Event Detection </h2>
 
-*- Qiuqiang Kong, Iwnoa Sobieraj, Wenwu Wang, Mark Plumbley, Detection and Classification of Acoustic Scenes and Events, 2016*
+*- Emre C ̧ akır, Giambattista Parascandolo, Toni Heittola, Heikki Huttunen, and Tuomas Virtanen*
+
 ## Model
 ## Dependenices
 This implementation uses Python 2.7, Keras 2.1 and Scikit Learn. The code works on Theano backend.
