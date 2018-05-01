@@ -1,7 +1,8 @@
-# Deep Neural Network Baseline For Dcase Challenge 2016
+# CQT-BASED CONVOLUTIONAL NEURAL NETWORKS FOR AUDIO SCENE CLASSIFICATION AND DOMESTIC AUDIO TAGGING
 
-*- Qiuqiang Kong, Iwnoa Sobieraj, Wenwu Wang, Mark Plumbley, Detection and Classification of Acoustic Scenes and Events, 2016*
+*- Thomas Lidy, Alexander Schindler, Detection and Classification of Acoustic Scenes and Events, 2016*
 ## Model
+
 ## Dependenices
 This implementation uses Python 2.7, Keras 2.1 and Scikit Learn. The code works on Theano backend.
 ```
