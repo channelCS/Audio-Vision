@@ -1,6 +1,7 @@
-# Deep Neural Network Baseline For Dcase Challenge 2016
+<h2> FRAMECNN: A WEAKLY-SUPERVISED LEARNING FRAMEWORK FOR FRAME-WISE ACOUSTIC EVENT DETECTION AND CLASSIFICATION </h2>
 
-*- Qiuqiang Kong, Iwnoa Sobieraj, Wenwu Wang, Mark Plumbley, Detection and Classification of Acoustic Scenes and Events, 2016*
+*- Szu-Yu Chou, Jyh-Shing Roger Jang, Yi-Hsuan Yang*
+
 ## Model
 ## Dependenices
 This implementation uses Python 2.7, Keras 2.1 and Scikit Learn. The code works on Theano backend.
