@@ -4,6 +4,7 @@
 
 <h3> Model </h3>
 
+<img src= "https://github.com/akshitac8/Summaries/blob/master/FrameCNN/C-ab3GBXkAAbefX.jpg" width="">
 <h3> Dependenices </h3>
 
 This implementation uses Python 2.7, Keras 2.1 and Scikit Learn. The code works on Theano backend.
