@@ -2,7 +2,7 @@
 [![license](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://github.com/channelCS/Summaries/blob/master/LICENSE) [![dep1](https://img.shields.io/badge/Theano-0.9+-blue.svg)](http://deeplearning.net/software/theano/) [![dep2](https://img.shields.io/badge/Keras-2.1+-blue.svg)](https://keras.io/) 
 
 ```diff
-+ Implementation & Reviews
++ Implementation
 ```
 
 **Implementation and reviews of Audio & Computer vision related papers in `python`.**
