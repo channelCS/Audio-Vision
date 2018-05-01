@@ -1,34 +1,42 @@
-# Attention and Localization based on a Deep Convolutional Recurrent Model for Weakly Supervised Audio Tagging
+ <h2>Attention and Localization based on a Deep Convolutional Recurrent Model for Weakly Supervised Audio Tagging </h2>
 
 *- Yong Xu, Qiuqiang Kong, Qiang Huang, Wenwu Wang, Mark D. Plumbley*
 
-## Model
+<h3>Model</h3>
 
 The Model explained here uses CNN-RNN with attention and localization
 
 <img src = "https://github.com/akshitac8/Summaries/blob/master/ATT-CGRNN/att.png">
 
-## Dependenices
+<h3> Dependenices </h3>
 This implementation uses Python 2.7, Keras 2.1 and Scikit Learn. The code works on Theano backend.
+
 ```
 $ pip install requirements.txt
 ```
-## Feature Extraction
+<h3> Feature Extraction </h3>
+
 - Methods Used
+
 - Reason
 
-## Training
+<h3> Training </h3>
+
 - Dataset
-    - All files are available to download from [here](http://www.cs.tut.fi/sgn/arg/dcase2016/task-acoustic-scene-classification). Extract the contents 
+
+    - All files are available to download from [here](http://www.cs.tut.fi/sgn/arg/dcase2016/task-acoustic-scene-classification). Extract the contents according to --- file.
+    
 - Development Mode
+
 - Evaluation Mode
 
-## Results
+<h3> Results </h3>
+
 - Dev :                                                         Eva: 
 
-## References
+<h3> References </h3>
 
-## License
+<h3> License </h3>
 
 MIT
 
