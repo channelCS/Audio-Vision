@@ -1,4 +1,4 @@
-<h2> Attention and Localization based on a Deep Convolutional Recurrent Model for Weakly Supervised Audio Tagging </h2>
+# Attention and Localization based on a Deep Convolutional Recurrent Model for Weakly Supervised Audio Tagging
 
 *- Yong Xu, Qiuqiang Kong, Qiang Huang, Wenwu Wang, Mark D. Plumbley*
 ## Model
