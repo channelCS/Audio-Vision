@@ -1,6 +1,6 @@
-# Deep Neural Network Baseline For Dcase Challenge 2016
+<h2> A convolutional neural network approach for acoustic scene classification </h2>
 
-*- Qiuqiang Kong, Iwnoa Sobieraj, Wenwu Wang, Mark Plumbley, Detection and Classification of Acoustic Scenes and Events, 2016*
+*- Michele Valenti, Stefano Squartini, Aleksandr Diment, Giambattista Parascandolo and Tuomas Virtanen, IJCNN, 2017*
 ## Model
 ## Dependenices
 This implementation uses Python 2.7, Keras 2.1 and Scikit Learn. The code works on Theano backend.
@@ -30,16 +30,19 @@ MIT
 
 
 - Features
-    -  Mfcc are widely used for speech recognition but it looses essential part of Information required for Classification.
-    -  For, this task they have chosen Mel filter bank over other features as it showed prominent results over others
-    -  They have computed mel-filterbanks on the basis of same height and area.
-    -  Mel was able to detect classes with frequencies > 1KHz
+    - Log-mel features were chosen as a convenient image liked input for CNN. 
+    - we calculate logmel features by measuring short-time Fourier transform (STFT) of raw audio with 40 ms window size and 50% overlap. Then, square the absolute value and combine them with 40 mel frequencies resulting in 40 mel energies. Finally, Logarithmic of the mel energies is calculated. The final result is further normalized by subtracting its mean and dividing it by its standard deviation.
+    - For the proposed model, the author opted for further splitting the spectrograms into shorter, non-overlapping spectrograms which were called sequenced hereafter.
+
 - Architecture proposed
-    - Deep Neural Network (DNN) with 400 input nodes (10 frames * 40 mel frequencies) and 500 hidden units per layer with 3 hidden layers.
+    - The author proposed two-layer Deep-CNN with batch normalization resulting in the increase of model complexity and speed for adapting its own layer weights.
+    - The structure of the model includes:
+        - first convolution layer with 128 relu kernels with 5x5 filter size followed with polling layer.
+        - second condition layer with 256 relu kernels followed with pooling layer.
+        - Averaging all the prediction scores with argmax()
   
 - Technique used
-    - The paper proposed same DNN architecture for the task of Audio classification, multi-label classification, and, event detection for different scenes.
-    - Deep Neural Network, when ued with mel spectrogram, proves to be a novel idea for audio-processing because of its ability to learn, generalise and predict on the basis of the pattern.
+    - Deep-CNN with log-mel features for audio scene classification as log-mel showed notable audio spectra for a model to train.  
 
 
 
