@@ -7,6 +7,7 @@ The Model here uses Deep-CNN with multiple layers to obtain feature maps which a
 
 ## Dependenices
 This implementation uses Python 2.7, Keras 2.1 and Scikit Learn. The code works on Theano backend.
+
 ```
 $ pip install requirements.txt
 ```
@@ -23,9 +24,9 @@ $ pip install requirements.txt
 ## Results
 - Dev :                                                         Eva: 
 
-##References
+## References
 
-##License
+## License
 MIT
   
 
