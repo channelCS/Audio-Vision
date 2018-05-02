@@ -1,7 +1,11 @@
 <h2> SEQUENCE TO SEQUENCE AUTOENCODERS FOR UNSUPERVISED REPRESENTATION LEARNING FROM AUDIO </h2>
 
 *- Shahin Amiriparian, Michael Freitag, Nicholas Cummins, Bjorn Schuller*
+
 ## Model
+
+<img src="https://github.com/akshitac8/Summaries/blob/master/seq2seq_RNN/Presentation1.jpg" width ="850">
+
 ## Dependenices
 This implementation uses Python 2.7, Keras 2.1 and Scikit Learn. The code works on Theano backend.
 ```
