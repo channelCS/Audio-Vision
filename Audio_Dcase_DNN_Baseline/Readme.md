@@ -15,12 +15,11 @@ This implementation uses Python 2.7, Keras 2.1 and Scikit Learn. The code works 
 $ pip install requirements.txt
 ```
 ## Feature Extraction
-- Methods Used
-- Reason
+- Method Used: Normaized Mel Filter Bank range ~ [0,1]
 
 ## Training
 - Dataset
-    - All files are available to download from [here](http://www.cs.tut.fi/sgn/arg/dcase2016/task-acoustic-scene-classification). Extract the contents 
+    - All files are available to download from [here](http://www.cs.tut.fi/sgn/arg/dcase2016/task-acoustic-scene-classification). Extract the contents according to the path mentioned in the ``` config ``` file
 - Development Mode
 - Evaluation Mode
 
@@ -28,6 +27,7 @@ $ pip install requirements.txt
 - Dev :                                                         Eva: 
 
 ## References
+1. https://github.com/qiuqiangkong/DCASE2016_Task1
 
 ## License
 MIT
