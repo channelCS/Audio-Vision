@@ -4,6 +4,8 @@
 
 ## Model
 
+The model explained here uses recurrent autoencoder for feature extraction with MLP model for final prediction.
+
 <img src="https://github.com/akshitac8/Summaries/blob/master/seq2seq_RNN/Presentation1.jpg" width ="850">
 
 ## Dependenices
