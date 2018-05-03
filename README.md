@@ -36,3 +36,9 @@
 
 All kind of feedback (code style, bugs, comments etc.) is welcome. Please open an issue on this Reposistory.
 
+<h3>Team Roles</h3>
+
+Aditya Arora  :
+
+Akshita Gupta :
+
