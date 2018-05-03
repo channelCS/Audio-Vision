@@ -23,6 +23,7 @@
 
 [8] Exploring Models and Data for Image Question Answering [[paper](https://arxiv.org/pdf/1505.02074.pdf)][Implementation]
 
+[9] Bottom-Up and Top-Down Attention for Image Captioning and Visual Question Answering [[paper](https://arxiv.org/pdf/1707.07998.pdf)][Implementation]
 ```diff
 - Application
 ```
