@@ -5,7 +5,7 @@
 + Implementation
 ```
 
-**Implementation and reviews of Audio & Computer vision related papers in `python`.**
+<h3> Implementation and reviews of Audio & Computer vision related papers in `python`. </h3>
 
 [1] Deep Neural Network Baseline For Dcase Challenge 2016 [[Paper](http://www.cs.tut.fi/sgn/arg/dcase2016/documents/challenge_technical_reports/DCASE2016_Kong_3008.pdf)] [[Implementation](https://github.com/channelCS/Summaries/tree/master/Audio_Dcase_DNN_Baseline)] 
 
@@ -21,16 +21,18 @@
 
 [7] Attention and Localization based on a Deep Convolutional Recurrent Model for Weakly Supervised Audio Tagging [[Paper](https://arxiv.org/pdf/1703.06052.pdf)][[Implementation](https://github.com/akshitac8/Summaries/tree/master/ATT-CGRNN)] 
 
+[8] Exploring Models and Data for Image Question Answering [[paper](https://arxiv.org/pdf/1505.02074.pdf)][Implementation]
+
 ```diff
 - Application
 ```
-**Application Deployed using heroku and Flask with python and JS**
+<h3> Application Deployed using heroku and Flask with python and JS </h3>
 
 [1] Digit classifier [Paper] [implementation] [[Application](https://github.com/channelCS/digit-identify)] 
 
 [2] MNIST Random Digit Regenerator [Paper] [Implementation] [[Application](https://github.com/channelCS/image-generate)]
 
-**FeedBack**
+<h3> FeedBack </h3>
 
 All kind of feedback (code style, bugs, comments etc.) is welcome. Please open an issue on this Reposistory.
 
