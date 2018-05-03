@@ -1,4 +1,4 @@
-# Summaries
+# Audio - Vision
 [![license](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://github.com/channelCS/Summaries/blob/master/LICENSE) [![dep1](https://img.shields.io/badge/Theano-0.9+-blue.svg)](http://deeplearning.net/software/theano/) [![dep2](https://img.shields.io/badge/Keras-2.1+-blue.svg)](https://keras.io/) 
 
 ```diff
@@ -29,3 +29,8 @@
 [1] Digit classifier [Paper] [implementation] [[Application](https://github.com/channelCS/digit-identify)] 
 
 [2] MNIST Random Digit Regenerator [Paper] [Implementation] [[Application](https://github.com/channelCS/image-generate)]
+
+**FeedBack**
+
+All kind of feedback (code style, bugs, comments etc.) is welcome. Please open an issue on this Reposistory.
+
