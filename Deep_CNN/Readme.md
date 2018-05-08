@@ -1,9 +1,9 @@
-<h2> A convolutional neural network approach for acoustic scene classification </h2>
+# A convolutional neural network approach for acoustic scene classification
 
 *- Michele Valenti, Stefano Squartini, Aleksandr Diment, Giambattista Parascandolo and Tuomas Virtanen, IJCNN, 2017*
 ## Model
 The Model here uses Deep-CNN with multiple layers to obtain feature maps which are followed by pooling and batch normalization.
-<img src="https://github.com/akshitac8/Summaries/blob/master/Audio_Dcase_CNN_logmel/cnn.PNG" width="800" >
+<img src="./cnn.PNG" width="800" >
 
 ## Dependenices
 This implementation uses Python 2.7, Keras 2.1 and Scikit Learn. The code works on Theano backend.

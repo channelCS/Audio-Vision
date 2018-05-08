@@ -1,10 +1,10 @@
-<h3> CQT-BASED CONVOLUTIONAL NEURAL NETWORKS FOR AUDIO SCENE CLASSIFICATION AND DOMESTIC AUDIO TAGGING</h3>
+# CQT-BASED CONVOLUTIONAL NEURAL NETWORKS FOR AUDIO SCENE CLASSIFICATION AND DOMESTIC AUDIO TAGGING
 
 *- Thomas Lidy, Alexander Schindler, Detection and Classification of Acoustic Scenes and Events, 2016*
 
 ## Model
 The Model here uses parrallel CNN architecture to capture relevant feature maps for both time and frequency domain.
-<img src="https://github.com/akshitac8/Summaries/blob/master/Audio_Dcase_CNN_CQT/cqt_cnn.PNG" width="738">
+<img src="./cqt_cnn.PNG" width="738">
 
 ## Dependenices
 This implementation uses Python 2.7, Keras 2.1 and Scikit Learn. The code works on Theano backend.
