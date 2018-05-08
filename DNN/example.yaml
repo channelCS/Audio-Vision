@@ -1,6 +1,6 @@
 logmel:
     fs:
-    - 44100.  
+    - 22050.  
     n_mels:
     - 40
     fmin:

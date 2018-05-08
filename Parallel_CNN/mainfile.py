@@ -39,6 +39,8 @@ new_p        = '../utils/dcase_data/texts/eva/evaluate.txt'
 
 labels = [ 'bus', 'cafe/restaurant', 'car', 'city_center', 'forest_path', 'grocery_store', 'home', 'beach', 
             'library', 'metro_station', 'office', 'residential_area', 'train', 'tram', 'park' ]
+lb_to_id = {lb:id for id, lb in enumerate(labels)}
+id_to_lb = {id:lb for id, lb in enumerate(labels)}
 
 # We define all model parameters here.
 prep='eval'               # dev or eval
@@ -96,7 +98,7 @@ def GetAllData(fe_fd, csv_file):
         i+=1
         X3d = aud_utils.mat_2d_to_3d( X, agg_num, hop )
         X3d_all.append( X3d )
-        y_all += [ aud_utils.lb_to_id[lb] ] * len( X3d )
+        y_all += [ lb_to_id[lb] ] * len( X3d )
     
     print "Features loaded",i                
     print 'All files loaded successfully'
@@ -131,7 +133,7 @@ def test(md,csv_file):
         preds = np.argmax( p_y_preds, axis=-1 )     # size: (n_block)
         b = scipy.stats.mode(preds)
         pred = int( b[0] )
-        pred_lbs.append( aud_utils.id_to_lb[ pred ] )
+        pred_lbs.append( id_to_lb[ pred ] )
     
     pred = []    
     # write out result
