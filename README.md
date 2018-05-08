@@ -39,7 +39,7 @@ All kind of feedback (code style, bugs, comments etc.) is welcome. Please open a
 
 ### Team Roles
 
-Aditya Arora  :
+Aditya Arora  : Code Environments, Structuring, Dynamic Description, logics, feature logisics.
 
-Akshita Gupta :
+Akshita Gupta : Paper Selections, Theoritical, Model Descriptions.
 
