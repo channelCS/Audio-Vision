@@ -46,7 +46,7 @@ folds=4                   # Number of folds
 save_model=False          # True if we want to save model
 model_type='Functional'   # Can be Dynamic or Functional
 model='DNN'               # Name of model
-feature="logmel"          # Name of feature
+feature="cqt"          # Name of feature
 
 dropout1=0.1              # 1st Dropout
 act1='relu'               # 1st Activation
