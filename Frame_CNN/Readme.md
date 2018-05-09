@@ -1,10 +1,11 @@
-# FRAMECNN: A WEAKLY-SUPERVISED LEARNING FRAMEWORK FOR FRAME-WISE ACOUSTIC EVENT DETECTION AND CLASSIFICATION
+# Framecnn: A Weakly-supervised Learning Framework For Frame-wise Acoustic Event Detection And Classification
 
 *- Szu-Yu Chou, Jyh-Shing Roger Jang, Yi-Hsuan Yang*
 
 ## Model
 
 <img src= "./fcnn_model.jpg" width="">
+
 ### Dependenices
 
 This implementation uses Python 2.7, Keras 2.1 and Scikit Learn. The code works on Theano backend.
