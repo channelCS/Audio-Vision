@@ -21,7 +21,7 @@
 
 [7] Attention and Localization based on a Deep Convolutional Recurrent Model for Weakly Supervised Audio Tagging [[Paper](https://arxiv.org/pdf/1703.06052.pdf)][[Implementation](https://github.com/akshitac8/Summaries/tree/master/Attention_CGRNN)] 
 
-[8] Exploring Models and Data for Image Question Answering [[paper](https://arxiv.org/pdf/1505.02074.pdf)][Implementation]
+[8] Exploring Models and Data for Image Question Answering [[paper](https://arxiv.org/pdf/1505.02074.pdf)][[Implementation](https://github.com/akshitac8/Summaries/tree/master/VIS-LSTM)]
 
 [9] Bottom-Up and Top-Down Attention for Image Captioning and Visual Question Answering [[paper](https://arxiv.org/pdf/1707.07998.pdf)][Implementation]
 ```diff
