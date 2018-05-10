@@ -11,10 +11,9 @@ warnings.simplefilter("ignore")
 
 # Clone the keras_aud library and place the path in ka_path variable
 import sys
-ka_path="e:/akshita_workspace/cc"
+ka_path="e:/akshita_workspace/git_x"
 sys.path.insert(0, ka_path)
-from keras_aud import aud_audio, aud_feature
-from keras_aud import aud_model, aud_utils
+from keras_aud import aud_audio, aud_model, aud_utils
 
 # Make imports
 import csv
@@ -26,7 +25,7 @@ from sklearn.cross_validation import KFold
 from keras.utils import to_categorical
 
 # This is where all audio files reside and features will be extracted
-audio_ftr_path='E:/akshita_workspace/cc'
+audio_ftr_path='E:/akshita_workspace/git_x'
 
 # We now tell the paths for audio, features and texts.
 wav_dev_fd   = audio_ftr_path+'/dcase_data/audio/dev'
@@ -50,14 +49,14 @@ model_type='Functional'   # Can be Dynamic or Functional
 model='DNN'               # Name of model
 feature="logmel"          # Name of feature
 
-dropout1=0.1              # 1st Dropout
+dropout1=0.2              # 1st Dropout
 act1='relu'               # 1st Activation
 act2='relu'               # 2nd Activation
-act3='softmax'            # 3rd Activation
+act3='sigmoid'            # 3rd Activation
 
-input_neurons=400         # Number of Neurons
-epochs=100                # Number of Epochs
-batchsize=128             # Batch Size
+input_neurons=200         # Number of Neurons
+epochs=100                 # Number of Epochs
+batchsize=100              # Batch Size
 num_classes=15            # Number of classes
 filter_length=3           # Size of Filter
 nb_filter=100             # Number of Filters
@@ -66,9 +65,9 @@ agg_num=10                # Number of frames
 hop=10                    # Hop Length
 
 #We extract audio features
-#aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example.yaml')
-#aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example.yaml')
-#bre
+#aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example.yaml',dataset = 'dcase_2016')
+#aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example.yaml',dataset = 'dcase_2016')  
+
 def GetAllData(fe_fd, csv_file):
     """
     Loads all the features saved as pickle files.
@@ -122,7 +121,7 @@ def test(md,csv_file):
         names.append( li[0] )
         na = li[0][6:-4]
         #audio evaluation name
-        fe_path = eva_fd + '/' + na + '.f'
+        fe_path = eva_fd + '/' + feature + '/' + na + '.f'
         X0 = cPickle.load( open( fe_path, 'rb' ) )
         X0 = aud_utils.mat_2d_to_3d( X0, agg_num, hop )
         
@@ -154,10 +153,10 @@ tr_X, tr_y = GetAllData( dev_fd+'/'+feature, label_csv)
 print(tr_X.shape)
 print(tr_y.shape)    
     
-tr_X=aud_utils.mat_3d_to_nd(model,tr_X)
-print(tr_X.shape)
 dimx=tr_X.shape[-2]
 dimy=tr_X.shape[-1]
+tr_X=aud_utils.mat_3d_to_nd(model,tr_X)
+print(tr_X.shape)
 
 if prep=='dev':
     cross_validation=True
@@ -217,7 +216,7 @@ else:
     #fit the model
     lrmodel.fit(train_x,train_y,batch_size=batchsize,epochs=epochs,verbose=1)
     
-    truth,pred=test(lrmodel,txt_eva_path,new_p,model)
+    truth,pred=test(lrmodel,txt_eva_path)
 
     acc=aud_utils.calculate_accuracy(truth,pred)
     print "Accuracy %.2f prcnt"%acc

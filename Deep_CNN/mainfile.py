@@ -13,8 +13,7 @@ warnings.simplefilter("ignore")
 import sys
 ka_path="e:/akshita_workspace/cc"
 sys.path.insert(0, ka_path)
-from keras_aud import aud_audio, aud_feature
-from keras_aud import aud_model, aud_utils
+from keras_aud import aud_audio, aud_model, aud_utils
 
 # Make imports
 import csv
