@@ -52,14 +52,12 @@ feature="logmel"          # Name of feature
 dropout1=0.2              # 1st Dropout
 act1='relu'               # 1st Activation
 act2='relu'               # 2nd Activation
-act3='sigmoid'            # 3rd Activation
+act3='relu'            # 3rd Activation
 
-input_neurons=200         # Number of Neurons
+input_neurons=400         # Number of Neurons
 epochs=100                 # Number of Epochs
-batchsize=100              # Batch Size
+batchsize=100             # Batch Size
 num_classes=15            # Number of classes
-filter_length=3           # Size of Filter
-nb_filter=100             # Number of Filters
 
 agg_num=10                # Number of frames
 hop=10                    # Hop Length
@@ -163,8 +161,7 @@ if prep=='dev':
 else:
     cross_validation=False
     
-miz=aud_model.Functional_Model(input_neurons=input_neurons,cross_validation=cross_validation,dropout1=dropout1,
-    act1=act1,act2=act2,act3=act3,nb_filter = nb_filter, filter_length=filter_length,
+miz=aud_model.Functional_Model(input_neurons=input_neurons,dropout=0.2,
     num_classes=num_classes,
     model=model,dimx=dimx,dimy=dimy)
 
