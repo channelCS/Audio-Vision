@@ -52,7 +52,7 @@ act2='sigmoid'              # 2nd Activation
 act3='sigmoid'           # 3rd Activation
 
 input_neurons=500      # Number of Neurons
-epochs=2             # Number of Epochs
+epochs=20             # Number of Epochs
 batchsize=100       # Batch Size
 num_classes=len(labels) # Number of classes
 filter_length=5      # Size of Filter
@@ -76,11 +76,11 @@ print "Number of filters",nb_filter
 
 ## EXTRACT FEATURES
 
-aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example.yaml',dataset='chime_2016')
-aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example.yaml',dataset='chime_2016')
+#aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example.yaml',dataset='chime_2016')
+#aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example.yaml',dataset='chime_2016')
 
 
-def GetAllData(fe_fd, csv_file, agg_num, hop):
+def GetAllData(fe_fd, csv_file):
     """
     Input: Features folder(String), CSV file(String), agg_num(Integer), hop(Integer).
     Output: Loaded features(Numpy Array) and labels(Numpy Array).
@@ -98,7 +98,7 @@ def GetAllData(fe_fd, csv_file, agg_num, hop):
     for li in lis:
         # load data
         na = li[1]
-        path = eva_fd + '/' + feature + '/' + na + '.f'
+        path = fe_fd + '/' + na + '.f'
         info_path = label_csv + '/' + na + '.csv'
         with open( info_path, 'rb') as g:
             reader2 = csv.reader(g)
@@ -129,7 +129,7 @@ def GetAllData(fe_fd, csv_file, agg_num, hop):
 
 
 
-def test(md,csv_file):
+def test(md,csv_file,model):
     # load name of wavs to be classified
     with open( csv_file, 'rb') as f:
         reader = csv.reader(f)
@@ -165,9 +165,7 @@ def test(md,csv_file):
     
     return np.array(te_y), np.array(y_pred)
 
-
-
-tr_X, tr_y = GetAllData( dev_fd+'/'+feature, meta_train_csv, agg_num, hop )
+tr_X, tr_y = GetAllData( dev_fd+'/'+feature, meta_train_csv)
 
 print(tr_X.shape)
 print(tr_y.shape)    
@@ -190,9 +188,29 @@ else:
 #    model=model,dimx=dimx,dimy=dimy)
 
 ## In case of Dynamic CRNN
-miz=aud_model.Dynamic_Model(num_classes=num_classes,
-    model=model,dimx=dimx,dimy=dimy,
-    cnn_layers=4,rnn_layers=3,rnn_type='LSTM',rnn_units=[128],nb_filter=[100],pools=[2],drops=[0.1])
+#pools=[['max',2],['max',2]]
+#miz=aud_model.Dynamic_Model(num_classes=num_classes,
+#    model=model,dimx=dimx,dimy=dimy,acts=['relu','relu'],bn=True,
+#    cnn_layers=2,rnn_layers=1,rnn_type='LSTM',rnn_units=[128],nb_filter=[100,100],filter_length=[5,5],pools=pools,drops=[0.25])
+
+
+
+cnn_layers=4
+acts          = ['relu','relu','relu','relu']
+drops         = [0.2   , 0.2, 0.2   , 0.2  ]
+pools         = [['max',(1,2)],['max',(1,2)],['max',(1,2)],['max',(1,2)]]
+nb_filter     = [100    , 100, 100 , 100  ]
+filter_length = [5     , 5,5     , 5    ]
+end_dense={'input_neurons':200,'activation':'relu','dropout':0.1}
+rnn_type      ='bdGRU'
+rnn_layers    =2
+rnn_units     =[128,128]
+miz=aud_model.Dynamic_Model(model = model, cnn_layers = cnn_layers,
+                            nb_filter = nb_filter, filter_length = filter_length,
+                            dimx = dimx, dimy = dimy,
+                            acts = acts, drops = drops, pools = pools,
+                            end_dense = end_dense,num_classes = num_classes,
+                            rnn_type = rnn_type, rnn_units=rnn_units,rnn_layers = rnn_layers)
 
 
 np.random.seed(68)
