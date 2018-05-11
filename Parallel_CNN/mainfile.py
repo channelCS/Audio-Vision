@@ -11,7 +11,7 @@ warnings.simplefilter("ignore")
 
 # Clone the keras_aud library and place the path in ka_path variable
 import sys
-ka_path="e:/akshita_workspace/cc"
+ka_path="e:/akshita_workspace/git_x"
 sys.path.insert(0, ka_path)
 from keras_aud import aud_audio, aud_model, aud_utils
 
@@ -49,14 +49,14 @@ model_type='Functional'   # Can be Dynamic or Functional
 model='CNN'               # Name of model
 feature="cqt"             # Name of feature
 
-dropout1=0.1              # 1st Dropout
+dropout1=0.25             # 1st Dropout
 act1='relu'               # 1st Activation
 act2='relu'               # 2nd Activation
 act3='softmax'            # 3rd Activation
 
-input_neurons=400         # Number of Neurons
-epochs=2                  # Number of Epochs
-batchsize=128             # Batch Size
+input_neurons=500         # Number of Neurons
+epochs=25                  # Number of Epochs
+batchsize=100             # Batch Size
 num_classes=15            # Number of classes
 filter_length=3           # Size of Filter
 nb_filter=100             # Number of Filters
@@ -144,8 +144,6 @@ def test(md,csv_file):
     truth = open(new_p,'r').readlines()
     pred = [i.split('\t')[1].split('\n')[0]for i in pred]
     truth = [i.split('\t')[1]for i in truth]
-    pred.sort()
-    truth.sort()
     return truth,pred
 
 tr_X, tr_y = GetAllData( dev_fd+'/'+feature, label_csv)
@@ -217,6 +215,10 @@ else:
     lrmodel.fit(train_x,train_y,batch_size=batchsize,epochs=epochs,verbose=1)
     
     truth,pred=test(lrmodel,txt_eva_path)
+    
+    from sklearn.metrics import accuracy_score
+    acc1=accuracy_score(truth, pred)
+    print acc1
 
-    acc=aud_utils.calculate_accuracy(truth,pred)
+    acc=aud_utils.calculate_accuracy(truth.sort(),pred.sort())
     print "Accuracy %.2f prcnt"%acc

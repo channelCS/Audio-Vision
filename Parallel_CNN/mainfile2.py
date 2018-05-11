@@ -46,14 +46,14 @@ model_type='Functional'   # Type of model
 model='CNN'               # Name of model
 feature="cqt"          # Name of feature
 
-dropout1=0.25          # 1st Dropout
+dropout1=0.1          # 1st Dropout
 act1='relu'              # 1st Activation
-act2='sigmoid'              # 2nd Activation
+act2='relu'              # 2nd Activation
 act3='sigmoid'           # 3rd Activation
 
-input_neurons=400      # Number of Neurons
+input_neurons=500      # Number of Neurons
 epochs=2             # Number of Epochs
-batchsize=64       # Batch Size
+batchsize=100       # Batch Size
 num_classes=len(labels) # Number of classes
 filter_length=5      # Size of Filter
 nb_filter=128         # Number of Filters
@@ -76,8 +76,8 @@ path='E:/akshita_workspace/chime_home'
 
 ## EXTRACT FEATURES
 
-aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'defaults.yaml',dataset='chime_2016')
-aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'defaults.yaml',dataset='chime_2016')
+#aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example.yaml',dataset='chime_2016')
+#aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example.yaml',dataset='chime_2016')
 
 
 def GetAllData(fe_fd, csv_file, agg_num, hop):
@@ -241,6 +241,7 @@ else:
     eer=aud_utils.calculate_eer(truth,pred)
     
     p,r,f=aud_utils.prec_recall_fvalue(pred,truth,0.4,'macro')
+    
     print "EER %.2f"%eer
     print "Precision %.2f"%p
     print "Recall %.2f"%r
