@@ -65,8 +65,8 @@ agg_num=10                # Number of frames
 hop=10                    # Hop Length
 
 #We extract audio features
-aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example.yaml')
-aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example.yaml')
+#aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example.yaml')
+#aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example.yaml')
 
 def GetAllData(fe_fd, csv_file):
     """
@@ -121,7 +121,7 @@ def test(md,csv_file):
         names.append( li[0] )
         na = li[0][6:-4]
         #audio evaluation name
-        fe_path = eva_fd + '/' + na + '.f'
+        fe_path = eva_fd + '/' + feature + '/' + na + '.f'
         X0 = cPickle.load( open( fe_path, 'rb' ) )
         X0 = aud_utils.mat_2d_to_3d( X0, agg_num, hop )
         
