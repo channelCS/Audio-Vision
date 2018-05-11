@@ -25,7 +25,7 @@ from sklearn.cross_validation import KFold
 from keras.utils import to_categorical
 
 # This is where all audio files reside and features will be extracted
-audio_ftr_path='E:/akshita_workspace/'
+audio_ftr_path='E:/akshita_workspace/git_x/'
 
 # We now tell the paths for audio, features and texts.
 wav_dev_fd   = audio_ftr_path+'dcase_data/audio/dev'
@@ -46,8 +46,8 @@ prep='eval'               # dev or eval
 folds=4                   # Number of folds
 save_model=False          # True if we want to save model
 model_type='Functional'   # Can be Dynamic or Functional
-model='DNN'               # Name of model
-feature="logmel"          # Name of feature
+model='CNN'               # Name of model
+feature="cqt"             # Name of feature
 
 dropout1=0.1              # 1st Dropout
 act1='relu'               # 1st Activation
@@ -55,7 +55,7 @@ act2='relu'               # 2nd Activation
 act3='softmax'            # 3rd Activation
 
 input_neurons=400         # Number of Neurons
-epochs=100                # Number of Epochs
+epochs=2                  # Number of Epochs
 batchsize=128             # Batch Size
 num_classes=15            # Number of classes
 filter_length=3           # Size of Filter
@@ -65,8 +65,8 @@ agg_num=10                # Number of frames
 hop=10                    # Hop Length
 
 #We extract audio features
-aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example.yaml')
-aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example.yaml')
+#aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example.yaml')
+#aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example.yaml')
 
 def GetAllData(fe_fd, csv_file):
     """
@@ -153,17 +153,17 @@ tr_X, tr_y = GetAllData( dev_fd+'/'+feature, label_csv)
 print(tr_X.shape)
 print(tr_y.shape)    
     
-tr_X=aud_utils.mat_3d_to_nd(model,tr_X)
-print(tr_X.shape)
 dimx=tr_X.shape[-2]
 dimy=tr_X.shape[-1]
+tr_X=aud_utils.mat_3d_to_nd(model,tr_X)
+print(tr_X.shape)
 
 if prep=='dev':
     cross_validation=True
 else:
     cross_validation=False
     
-miz=aud_model.Functional_Model(input_neurons=input_neurons,cross_validation=cross_validation,dropout1=dropout1,
+miz=aud_model.Functional_Model(input_neurons=input_neurons,dropout=dropout1,
     act1=act1,act2=act2,act3=act3,nb_filter = nb_filter, filter_length=filter_length,
     num_classes=num_classes,
     model=model,dimx=dimx,dimy=dimy)
@@ -216,7 +216,7 @@ else:
     #fit the model
     lrmodel.fit(train_x,train_y,batch_size=batchsize,epochs=epochs,verbose=1)
     
-    truth,pred=test(lrmodel,txt_eva_path,new_p,model)
+    truth,pred=test(lrmodel,txt_eva_path)
 
     acc=aud_utils.calculate_accuracy(truth,pred)
     print "Accuracy %.2f prcnt"%acc
