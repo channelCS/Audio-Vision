@@ -46,7 +46,7 @@ prep='eval'               # dev or eval
 folds=4                   # Number of folds
 save_model=False          # True if we want to save model
 model_type='Functional'   # Can be Dynamic or Functional
-model='DNN'               # Name of model
+model='CNN'               # Name of model
 feature="cqt"             # Name of feature
 
 dropout1=0.1              # 1st Dropout
@@ -216,7 +216,7 @@ else:
     #fit the model
     lrmodel.fit(train_x,train_y,batch_size=batchsize,epochs=epochs,verbose=1)
     
-    truth,pred=test(lrmodel,txt_eva_path,new_p,model)
+    truth,pred=test(lrmodel,txt_eva_path)
 
     acc=aud_utils.calculate_accuracy(truth,pred)
     print "Accuracy %.2f prcnt"%acc

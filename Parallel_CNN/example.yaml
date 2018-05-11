@@ -4,10 +4,10 @@ cqt:
     hop_length:
     - 512
     n_bins:
-    - 120
+    - 80
     mono:
     - True
     bins_per_octave:
-    - 24
+    - 12
     window:
     - 'hamming'
