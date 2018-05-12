@@ -48,7 +48,7 @@ feature="logmel"          # Name of feature
 
 dropout1=0.25          # 1st Dropout
 act1='relu'              # 1st Activation
-act2='tanh'              # 2nd Activation
+act2='linear'              # 2nd Activation
 act3='sigmoid'           # 3rd Activation
 
 input_neurons=500      # Number of Neurons
