@@ -5,8 +5,6 @@ Created on Fri May 11 12:14:29 2018
 @author: Akshita Gupta
 """
 
-# -*- coding: utf-8 -*-
-
 import warnings
 warnings.simplefilter("ignore")
 
@@ -28,9 +26,9 @@ wav_dev_fd   = ka_path+'/chime_data_rr/audio/dev'
 wav_eva_fd   = ka_path+'/chime_data_rr/audio/eva'
 dev_fd       = ka_path+'/chime_data_rr/features/dev'
 eva_fd       = ka_path+'/chime_data_rr/features/eva'
-meta_train_csv  = ka_path+'/chime_data_rr/texts/meta_csvs/development_chunks_raw.csv'
-meta_test_csv   = ka_path+'/chime_data_rr/texts/meta_csvs/evaluation_chunks_refined.csv' #eva_csv_path
-label_csv       = ka_path+'/chime_data_rr/texts/label_csvs'
+meta_train_csv  = ka_path+'/keras_aud/utils/dcase16_task4/meta_csvs/development_chunks_refined.csv'
+meta_test_csv   = ka_path+'/keras_aud/utils/dcase16_task4/meta_csvs/evaluation_chunks_refined.csv' #eva_csv_path
+label_csv       = ka_path+'/keras_aud/utils/dcase16_task4/label_csvs'
 
 labels = [ 'c', 'm', 'f', 'v', 'p', 'b', 'o', 'S' ]
 
@@ -68,24 +66,25 @@ print "Batchsize",batchsize
 print "Number of filters",nb_filter
 print "Activations",act1,act2,act3
 
-## UNPACK THE DATASET ACCORDING TO KERAS_AUD
-
-# [NEEDED AT INITIAL STAGE]
-#path='E:/akshita_workspace/chime_home'
-# [NEEDED AT INITIAL STAGE]
-#aud_utils.unpack_chime_2k16(path,wav_dev_fd,wav_eva_fd,meta_train_csv,meta_test_csv,label_csv)
+dataset = 'chime_2016'
+extract = False
+unpack  = False
+## UNPACK THE DATASET ACCORDING TO KERAS_AUD [NEEDED AT INITIAL STAGE]
+if unpack:
+    path='' #path to chime_home directory    
+    aud_utils.unpack_chime_2k16(path,wav_dev_fd,wav_eva_fd,meta_train_csv,meta_test_csv,label_csv)
 
 ## EXTRACT FEATURES
-
-#aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example.yaml',dataset='chime_2016')
-#aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example.yaml',dataset='chime_2016')
+if extract:
+    aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example.yaml',dataset=dataset)
+    aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example.yaml',dataset=dataset)
 
 
 def GetAllData(fe_fd, csv_file):
     """
-    Input: Features folder(String), CSV file(String), agg_num(Integer), hop(Integer).
-    Output: Loaded features(Numpy Array) and labels(Numpy Array).
     Loads all the features saved as pickle files.
+    Input: Features folder(String), CSV file(String).
+    Output: Loaded features(Numpy Array) and labels(Numpy Array).
     """
     # read csv
     with open( csv_file, 'rb') as f:
@@ -111,16 +110,17 @@ def GetAllData(fe_fd, csv_file):
             y[ lb_to_id[ch] ] = 1
         try:
             X = cPickle.load( open( path, 'rb' ) )
-        except Exception as e:
-            print 'Error while parsing',path
-            continue
+        except:
+            print "Make sure you have extracted features\
+                            and given correct path"
+            raise Exception('Error while parsing files')
         # reshape data to (n_block, n_time, n_freq)
         i+=1
         X3d = aud_utils.mat_2d_to_3d( X, agg_num, hop )
         X3d_all.append( X3d )
         y_all += [ y ] * len( X3d )
     
-    print "Features loaded",i                
+    print "Features loaded",i
     print 'All files loaded successfully'
     # concatenate list to array
     X3d_all = np.concatenate( X3d_all )
@@ -184,32 +184,6 @@ else:
 
 ## In case of Functional CRNN    
 miz=aud_model.Functional_Model(model=model,dimx=dimx,dimy=dimy,num_classes=num_classes,act1=act1,act2=act2,act3=act3)
-    
-
-## In case of Dynamic CRNN
-#pools=[['max',2],['max',2]]
-#miz=aud_model.Dynamic_Model(num_classes=num_classes,
-#    model=model,dimx=dimx,dimy=dimy,acts=['relu','relu'],bn=True,
-#    cnn_layers=2,rnn_layers=1,rnn_type='LSTM',rnn_units=[128],nb_filter=[100,100],filter_length=[5,5],pools=pools,drops=[0.25])
-
-
-
-#acts          = ['relu','relu','relu','relu']
-#drops         = [0.25   , 0.25, 0.25   , 0.25  ]
-#pools         = [['max',(1,2)],['max',(1,2)],['max',(1,2)],['max',(1,2)]]
-#nb_filter     = [100    , 100, 100 , 100  ]
-#filter_length = [5     , 5,5     , 5    ]
-#end_dense={'input_neurons':200,'activation':'relu','dropout':0.1}
-#rnn_type      ='bdGRU'
-#rnn_layers    =2
-#rnn_units     =[128,128]
-#miz=aud_model.Dynamic_Model(model = model, cnn_layers = cnn_layers,
-#                            nb_filter = nb_filter, filter_length = filter_length,
-#                            dimx = dimx, dimy = dimy,
-#                            acts = acts, pools = pools,
-#                            end_dense = end_dense,num_classes = num_classes,
-#                            rnn_type = rnn_type, rnn_units=rnn_units,rnn_layers = rnn_layers)
-
 
 np.random.seed(68)
 if cross_validation:
@@ -220,8 +194,6 @@ if cross_validation:
         train_y = [tr_y[ii] for ii in train_indices]
         test_x  = [tr_X[ii] for ii in test_indices]
         test_y  = [tr_y[ii] for ii in test_indices]
-        #train_y = to_categorical(train_y,num_classes=len(labels))
-        #test_y = to_categorical(test_y,num_classes=len(labels)) 
         
         train_x=np.array(train_x)
         train_y=np.array(train_y)
@@ -232,9 +204,6 @@ if cross_validation:
         #get compiled model
         lrmodel=miz.prepare_model()
 
-        if lrmodel is None:
-            print "If you have used Dynamic Model, make sure you pass correct parameters"
-            raise SystemExit
         #fit the model
         lrmodel.fit(train_x,train_y,batch_size=batchsize,epochs=epochs,verbose=1)
         
