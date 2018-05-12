@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri May 11 12:14:29 2018
+Created on Tue Apr 17 03:37:44 2018
 
-@author: Akshita Gupta
+@author: adityac8
 """
-
-# -*- coding: utf-8 -*-
 
 import warnings
 warnings.simplefilter("ignore")
@@ -43,17 +41,17 @@ prep='eval'               # Which mode to use
 folds=2                   # Number of folds
 #Parameters that are passed to the model.
 model_type='Functional'   # Type of model
-model='CBRNN'               # Name of model
+model='TCNN'               # Name of model
 feature="logmel"          # Name of feature
 
 dropout1=0.25          # 1st Dropout
-act1='relu'              # 1st Activation
+act1='tanh'              # 1st Activation
 act2='tanh'              # 2nd Activation
 act3='sigmoid'           # 3rd Activation
 
-input_neurons=500      # Number of Neurons
-epochs=30             # Number of Epochs
-batchsize=100       # Batch Size
+input_neurons=400      # Number of Neurons
+epochs=20             # Number of Epochs
+batchsize=64       # Batch Size
 num_classes=len(labels) # Number of classes
 filter_length=5      # Size of Filter
 nb_filter=128         # Number of Filters
@@ -71,17 +69,17 @@ print "Activations",act1,act2,act3
 ## UNPACK THE DATASET ACCORDING TO KERAS_AUD
 
 # [NEEDED AT INITIAL STAGE]
-#path='E:/akshita_workspace/chime_home'
+path='E:/akshita_workspace/chime_home'
 # [NEEDED AT INITIAL STAGE]
 #aud_utils.unpack_chime_2k16(path,wav_dev_fd,wav_eva_fd,meta_train_csv,meta_test_csv,label_csv)
 
 ## EXTRACT FEATURES
 
-#aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example.yaml',dataset='chime_2016')
-#aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example.yaml',dataset='chime_2016')
+#aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'defaults.yaml',dataset='chime_2016')
+#aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'defaults.yaml',dataset='chime_2016')
 
 
-def GetAllData(fe_fd, csv_file):
+def GetAllData(fe_fd, csv_file, agg_num, hop):
     """
     Input: Features folder(String), CSV file(String), agg_num(Integer), hop(Integer).
     Output: Loaded features(Numpy Array) and labels(Numpy Array).
@@ -166,7 +164,9 @@ def test(md,csv_file,model):
     
     return np.array(te_y), np.array(y_pred)
 
-tr_X, tr_y = GetAllData( dev_fd+'/'+feature, meta_train_csv)
+
+
+tr_X, tr_y = GetAllData( dev_fd+'/'+feature, meta_train_csv, agg_num, hop )
 
 print(tr_X.shape)
 print(tr_y.shape)    
@@ -182,34 +182,8 @@ if prep=='dev':
 else:
     cross_validation=False
 
-## In case of Functional CRNN    
-miz=aud_model.Functional_Model(model=model,dimx=dimx,dimy=dimy,num_classes=num_classes,act1=act1,act2=act2,act3=act3)
-    
-
-## In case of Dynamic CRNN
-#pools=[['max',2],['max',2]]
-#miz=aud_model.Dynamic_Model(num_classes=num_classes,
-#    model=model,dimx=dimx,dimy=dimy,acts=['relu','relu'],bn=True,
-#    cnn_layers=2,rnn_layers=1,rnn_type='LSTM',rnn_units=[128],nb_filter=[100,100],filter_length=[5,5],pools=pools,drops=[0.25])
-
-
-
-#acts          = ['relu','relu','relu','relu']
-#drops         = [0.25   , 0.25, 0.25   , 0.25  ]
-#pools         = [['max',(1,2)],['max',(1,2)],['max',(1,2)],['max',(1,2)]]
-#nb_filter     = [100    , 100, 100 , 100  ]
-#filter_length = [5     , 5,5     , 5    ]
-#end_dense={'input_neurons':200,'activation':'relu','dropout':0.1}
-#rnn_type      ='bdGRU'
-#rnn_layers    =2
-#rnn_units     =[128,128]
-#miz=aud_model.Dynamic_Model(model = model, cnn_layers = cnn_layers,
-#                            nb_filter = nb_filter, filter_length = filter_length,
-#                            dimx = dimx, dimy = dimy,
-#                            acts = acts, pools = pools,
-#                            end_dense = end_dense,num_classes = num_classes,
-#                            rnn_type = rnn_type, rnn_units=rnn_units,rnn_layers = rnn_layers)
-
+nb_filter     = [50    , 100]    
+miz=aud_model.Functional_Model(model=model,dimx=dimx,dimy=dimy,num_classes=num_classes,act1=act1,act2=act2,act3=act3,nb_filter = nb_filter,dropout=dropout1)
 
 np.random.seed(68)
 if cross_validation:

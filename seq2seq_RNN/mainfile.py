@@ -25,9 +25,9 @@ wav_dev_fd   = ka_path+'/dcase_data/audio/dev'
 wav_eva_fd   = ka_path+'/dcase_data/audio/eva'
 dev_fd       = ka_path+'/dcase_data/features/dev/logmel'
 eva_fd       = ka_path+'/dcase_data/features/eva/logmel'
-label_csv    = ka_path+'/dcase_data/texts/dev/meta.txt'
-txt_eva_path = ka_path+'/dcase_data/texts/eva/test.txt'
-new_p        = ka_path+'/dcase_data/texts/eva/evaluate.txt'
+label_csv    = '../utils/dcase_data/texts/dev/meta.txt'
+txt_eva_path = '../utils/dcase_data/texts/eva/test.txt'
+new_p        = '../utils/dcase_data/texts/eva/evaluate.txt'
 
 #aud_audio.extract('logmel', wav_dev_fd, dev_fd,'example.yaml')
 #aud_audio.extract('logmel', wav_eva_fd, eva_fd,'example.yaml')
@@ -43,7 +43,7 @@ prep='eval'               # Which mode to use
 folds=4                   # Number of folds
 #Parameters that are passed to the model.
 model_type='Functional'   # Type of model
-model='seq2seq_lstm'               # Name of model
+model='seq2seq'               # Name of model
 feature="logmel"          # Name of feature
 
 dropout1=0.1             # 1st Dropout
@@ -145,21 +145,21 @@ def test(md,csv_file,new_p,model):
 
 def predict_sequence(encoder, decoder, source, n_steps, cardinality):
     # encode
-	state = encoder.predict(source)
-	# start of sequence input
-	target_seq = np.array([0.0 for _ in range(cardinality)]).reshape(1, 1, cardinality)
-	# collect predictions
-	output = list()
-	for t in range(n_steps):
-		# predict next char
-		y, h, c = decoder.predict([target_seq] + state)
-		# store prediction
-		output.append(y[0,0,:])
-		# update state
-		state = [h, c]
-		# update target sequence
-		target_seq = y
-	return np.array(output)
+    state = encoder.predict(source)
+    # start of sequence input
+    target_seq = np.array([0.0 for _ in range(cardinality)]).reshape(1, 1, cardinality)
+    # collect predictions
+    output = list()
+    for t in range(n_steps):
+        # predict next char
+        y, h, c = decoder.predict([target_seq] + state)
+        # store prediction
+        output.append(y[0,0,:])
+        # update state
+        state = [h, c]
+        # update target sequence
+        target_seq = y
+    return np.array(output)
 
 
 tr_X, tr_y = GetAllData( dev_fd, label_csv, agg_num, hop )
@@ -183,55 +183,22 @@ miz=aud_model.Functional_Model(input_neurons=input_neurons,cross_validation=cros
     model=model,dimx=dimx,dimy=dimy)
 
 np.random.seed(68)
-if cross_validation:
-    kf = KFold(len(tr_X),folds,shuffle=True,random_state=42)
-    results=[]    
-    for train_indices, test_indices in kf:
-        train_x = [tr_X[ii] for ii in train_indices]
-        train_y = [tr_y[ii] for ii in train_indices]
-        test_x  = [tr_X[ii] for ii in test_indices]
-        test_y  = [tr_y[ii] for ii in test_indices]
-        train_y = to_categorical(train_y,num_classes=len(labels))
-        test_y = to_categorical(test_y,num_classes=len(labels)) 
-        
-        train_x=np.array(train_x)
-        train_y=np.array(train_y)
-        test_x=np.array(test_x)
-        test_y=np.array(test_y)
-        print "Development Mode"
 
-        #get compiled model
-        lrmodel=miz.prepare_model()
+truth = open(new_p,'r').readlines()
+truth = [i.split('\t')[1]for i in truth]
+truth.sort()
+train_x=np.array(tr_X)
+train_y=np.array(tr_y)
+train_y = to_categorical(train_y,num_classes=len(labels))
+lrmodel=miz.prepare_model()
 
-        if lrmodel is None:
-            print "If you have used Dynamic Model, make sure you pass correct parameters"
-            raise SystemExit
-        #fit the model
-        lrmodel.fit(train_x,train_y,batch_size=batchsize,epochs=epochs,verbose=1)
-        
-        #make prediction
-        pred=lrmodel.predict(test_x, batch_size=32)
+#fit the model
+lrmodel.fit(train_x,train_y,batch_size=batchsize,epochs=epochs,verbose=1)
 
-        pred = [ii.argmax()for ii in pred]
-        test_y = [ii.argmax()for ii in test_y]
+truth,pred=test(lrmodel,txt_eva_path,new_p,model)
 
-        results.append(accuracy_score(pred,test_y))
-        print accuracy_score(pred,test_y)
-        jj=str(set(list(test_y)))
-        print "Unique in test_y",jj
-    print "Results: " + str( np.array(results).mean() )
-else:
-    train_x=np.array(tr_X)
-    train_y=np.array(tr_y)
-    print "Evaluation mode"
-    lrmodel=miz.prepare_model()
-#    train_y = to_categorical(train_y,num_classes=len(labels))
-        
-    #fit the model
-    lrmodel.fit(train_x,train_y,batch_size=batchsize,epochs=epochs,verbose=1)
-    
-    truth,pred=test(lrmodel,txt_eva_path,new_p,model)
+target = predict_sequence(encoder, decoder, X1, n_steps_out, n_features)
 
-    acc=aud_utils.calculate_accuracy(truth,pred)
-    print "Accuracy %.2f prcnt"%acc
+acc=aud_utils.calculate_accuracy(truth,pred)
+print "Accuracy %.2f prcnt"%acc
 
