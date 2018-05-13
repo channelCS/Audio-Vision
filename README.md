@@ -37,6 +37,10 @@
 
 All kind of feedback (code style, bugs, comments etc.) is welcome. Please open an issue on this Reposistory.
 
+### Contribution Guidelines
+
+If you are familiar with basics of contributing to github reposistories, feel free to skip this section. For total beginners who landed up here before reading anything about this. Take a look at the [blog-post](https://channelcs.github.io/open-source-data-visualization.html) to get started.
+
 ### Team Roles
 
 Aditya Arora  : Code Environments, Structuring, Dynamic Description, logics, feature logistics.
