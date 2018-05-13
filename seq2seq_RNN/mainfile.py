@@ -4,6 +4,7 @@ Created on Tue May 08 13:48:37 2018
 
 @author: Akshita Gupta
 """
+
 # -*- coding: utf-8 -*-
 
 import warnings
@@ -83,7 +84,7 @@ def GetAllData(fe_fd, csv_file, agg_num, hop):
         [na, lb] = li[0].split('\t')
         na = na.split('/')[1][0:-4]
         path = fe_fd + '/' + na + '.f'
-		X = aud_feature.load(path)
+        X = aud_feature.load(path)
         # reshape data to (n_block, n_time, n_freq)
         i+=1
         X3d = aud_utils.mat_2d_to_3d( X, agg_num, hop )
@@ -164,11 +165,14 @@ tr_X, tr_y = GetAllData( dev_fd, label_csv, agg_num, hop )
 
 print(tr_X.shape)
 print(tr_y.shape)    
-    
-tr_X=aud_utils.mat_3d_to_nd(model,tr_X)
-print(tr_X.shape)
 dimx=tr_X.shape[-2]
 dimy=tr_X.shape[-1]
+batch_num=tr_X.shape[0]
+
+tr_X=aud_utils.mat_3d_to_nd(model,tr_X)
+
+print(tr_X.shape)
+#target_data=np.zeros((batch_num,dimx,dimy))
 
 if prep=='dev':
     cross_validation=True
@@ -186,14 +190,15 @@ truth = open(new_p,'r').readlines()
 truth = [i.split('\t')[1]for i in truth]
 truth.sort()
 train_x=np.array(tr_X)
+target_data=train_x[::-1, :, ::-1]
 train_y=np.array(tr_y)
 train_y = to_categorical(train_y,num_classes=len(labels))
 lrmodel=miz.prepare_model()
 
 #fit the model
-lrmodel.fit(train_x,train_y,batch_size=batchsize,epochs=epochs,verbose=1)
-
-truth,pred=test(lrmodel,txt_eva_path,new_p,model)
+lrmodel.fit(x=[train_x,train_x],y=target_data,batch_size=batchsize,epochs=epochs,verbose=1)
+bre
+#truth,pred=test(lrmodel,txt_eva_path,new_p,model)
 
 target = predict_sequence(encoder, decoder, X1, n_steps_out, n_features)
 
