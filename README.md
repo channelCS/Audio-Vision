@@ -29,9 +29,9 @@
 ```
 ### Application Deployed using heroku and Flask with python and JS
 
-[1] Digit classifier [Paper] [implementation] [[Application](https://github.com/channelCS/digit-identify)] 
+[1] Digit classifier [[implementation](https://github.com/channelCS/mnist-cnn)] [[Application](https://github.com/channelCS/digit-identify)] 
 
-[2] MNIST Random Digit Regenerator [Paper] [Implementation] [[Application](https://github.com/channelCS/image-generate)]
+[2] MNIST Random Digit Regenerator [[Paper](https://arxiv.org/pdf/1504.07225.pdf)] [[Implementation](https://github.com/GauravBh1010tt/DeepLearn/tree/master/CorrNet)] [[Application](https://github.com/channelCS/image-generate)]
 
 ### FeedBack
 
@@ -41,5 +41,4 @@ All kind of feedback (code style, bugs, comments etc.) is welcome. Please open a
 
 Aditya Arora  : Code Environments, Structuring, Dynamic Description, logics, feature logistics.
 
-Akshita Gupta : Paper Selections, Theoritical, Model Descriptions.
-
+Akshita Gupta : Paper Selections, Understanding Theoritical concepts , Model Descriptions.
