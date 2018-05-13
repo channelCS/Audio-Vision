@@ -110,12 +110,7 @@ def GetAllData(fe_fd, csv_file):
         y = np.zeros( len(labels) )
         for ch in tags:
             y[ lb_to_id[ch] ] = 1
-        try:
-            X = cPickle.load( open( path, 'rb' ) )
-        except:
-            print "Make sure you have extracted features\
-                            and given correct path"
-            raise Exception('Error while parsing files')
+        X = aud_feature.load(path)
         # reshape data to (n_block, n_time, n_freq)
         i+=1
         X3d = aud_utils.mat_2d_to_3d( X, agg_num, hop )

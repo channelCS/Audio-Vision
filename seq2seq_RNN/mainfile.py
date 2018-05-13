@@ -83,11 +83,7 @@ def GetAllData(fe_fd, csv_file, agg_num, hop):
         [na, lb] = li[0].split('\t')
         na = na.split('/')[1][0:-4]
         path = fe_fd + '/' + na + '.f'
-        try:
-            X = cPickle.load( open( path, 'rb' ) )
-        except Exception as e:
-            print 'Error while parsing',path
-            continue
+		X = aud_feature.load(path)
         # reshape data to (n_block, n_time, n_freq)
         i+=1
         X3d = aud_utils.mat_2d_to_3d( X, agg_num, hop )
