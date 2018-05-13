@@ -37,27 +37,27 @@ id_to_lb = { id:lb for id, lb in enumerate(labels) }
 
 ## PARAMETERS
 
-prep='eval'               # Which mode to use
-folds=2                   # Number of folds
+prep='eval'             # Which mode to use
+folds=2                 # Number of folds
 #Parameters that are passed to the model.
-model_type='Functional'   # Type of model
-model='CBRNN'               # Name of model
-feature="logmel"          # Name of feature
+model_type='Functional' # Type of model
+model='CBRNN'           # Name of model
+feature="logmel"        # Name of feature
 
-dropout1=0.25          # 1st Dropout
-act1='relu'              # 1st Activation
-act2='linear'              # 2nd Activation
-act3='sigmoid'           # 3rd Activation
+dropout1=0.25           # 1st Dropout
+act1='relu'             # 1st Activation
+act2='linear'           # 2nd Activation
+act3='sigmoid'          # 3rd Activation
 
-input_neurons=500      # Number of Neurons
-epochs=30             # Number of Epochs
-batchsize=100       # Batch Size
+input_neurons=500       # Number of Neurons
+epochs=30               # Number of Epochs
+batchsize=100           # Batch Size
 num_classes=len(labels) # Number of classes
-filter_length=5      # Size of Filter
-nb_filter=128         # Number of Filters
+filter_length=5         # Size of Filter
+nb_filter=128           # Number of Filters
 #Parameters that are passed to the features.
-agg_num=10             # Agg Number(Integer) Number of frames
-hop=10                 # Hop Length(Integer)
+agg_num=10              # Number of frames
+hop=10                  # Hop Length
 
 print "Model Type",model_type
 print "Input Neurons",input_neurons
