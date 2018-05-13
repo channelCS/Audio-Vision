@@ -1,6 +1,6 @@
-<h2> SEQUENCE TO SEQUENCE AUTOENCODERS FOR UNSUPERVISED REPRESENTATION LEARNING FROM AUDIO </h2>
+# Sequence to Sequence Autoencoders for Unsupervised Representation Learning From Audio
 
-*- Shahin Amiriparian, Michael Freitag, Nicholas Cummins, Bjorn Schuller*
+*- Shahin Amiriparian, Michael Freitag, Nicholas Cummins, Bjorn Schuller*[[Paper](https://www.cs.tut.fi/sgn/arg/dcase2017/documents/workshop_papers/DCASE2017Workshop_Amiriparian_172.pdf)][[Dataset](http://www.cs.tut.fi/sgn/arg/dcase2017/challenge/task-acoustic-scene-classification)]
 
 ## Model
 

@@ -1,6 +1,7 @@
-# CQT-BASED CONVOLUTIONAL NEURAL NETWORKS FOR AUDIO SCENE CLASSIFICATION AND DOMESTIC AUDIO TAGGING
+# Cqt-based Convolutional Neural Networks for Audio Scene Classification and Domestic Audio Tagging
 
-*- Thomas Lidy, Alexander Schindler, Detection and Classification of Acoustic Scenes and Events, 2016*
+*- Thomas Lidy, Alexander Schindler, Detection and Classification of Acoustic Scenes and Events, 2016*[[Paper](http://www.cs.tut.fi/sgn/arg/dcase2016/documents/challenge_technical_reports/DCASE2016_Lidy_4007.pdf)][[Dataset1](http://www.cs.tut.fi/sgn/arg/dcase2016/task-acoustic-scene-classification)]
+[[Dataset2](http://www.cs.tut.fi/sgn/arg/dcase2016/task-audio-tagging)]
 
 ## Model
 The Model here uses parrallel CNN architecture to capture relevant feature maps for both time and frequency domain.

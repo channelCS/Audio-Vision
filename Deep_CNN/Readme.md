@@ -1,6 +1,6 @@
 # A convolutional neural network approach for acoustic scene classification
 
-*- Michele Valenti, Stefano Squartini, Aleksandr Diment, Giambattista Parascandolo and Tuomas Virtanen, IJCNN, 2017*
+*- Michele Valenti, Stefano Squartini, Aleksandr Diment, Giambattista Parascandolo and Tuomas Virtanen, IJCNN, 2017*[[Paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=7966035)][[Dataset](http://www.cs.tut.fi/sgn/arg/dcase2016/task-audio-tagging)]
 ## Model
 The Model here uses Deep-CNN with multiple layers to obtain feature maps which are followed by pooling and batch normalization.
 <img src="./cnn.PNG" width="800" >

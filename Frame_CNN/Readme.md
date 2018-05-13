@@ -1,6 +1,6 @@
 # Framecnn: A Weakly-supervised Learning Framework For Frame-wise Acoustic Event Detection And Classification
 
-*- Szu-Yu Chou, Jyh-Shing Roger Jang, Yi-Hsuan Yang*
+*- Szu-Yu Chou, Jyh-Shing Roger Jang, Yi-Hsuan Yang*[[Paper](https://www.cs.tut.fi/sgn/arg/dcase2017/documents/challenge_technical_reports/DCASE2017_Chou_102.pdf)][[Dataset](http://www.cs.tut.fi/sgn/arg/dcase2016/task-audio-tagging)][[Dataset](http://www.cs.tut.fi/sgn/arg/dcase2016/task-acoustic-scene-classification)]
 
 ## Model
 

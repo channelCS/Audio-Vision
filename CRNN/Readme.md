@@ -1,6 +1,6 @@
 # Convolutional Recurrent Neural Networks for Polyphonic Sound Event Detection
 
-*- Emre C ̧ akır, Giambattista Parascandolo, Toni Heittola, Heikki Huttunen, and Tuomas Virtanen*[[Paper]()][[Dataset](http://www.cs.tut.fi/sgn/arg/dcase2016/task-audio-tagging)]
+*- Emre C ̧ akır, Giambattista Parascandolo, Toni Heittola, Heikki Huttunen, and Tuomas Virtanen*[[Paper](https://arxiv.org/pdf/1702.06286.pdf)][[Dataset](http://www.cs.tut.fi/sgn/arg/dcase2016/task-audio-tagging)]
 
 
 ## Train your own network
