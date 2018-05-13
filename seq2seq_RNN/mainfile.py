@@ -4,6 +4,8 @@ Created on Tue May 08 13:48:37 2018
 
 @author: Akshita Gupta
 """
+# -*- coding: utf-8 -*-
+
 import warnings
 warnings.simplefilter("ignore")
 

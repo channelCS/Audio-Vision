@@ -5,15 +5,16 @@ Created on Tue May 08 17:13:52 2018
 @author: adityac8
 """
 
-# Suppress warnings
+# -*- coding: utf-8 -*-
+
 import warnings
 warnings.simplefilter("ignore")
 
-# Clone the keras_aud library and place the path in ka_path variable
 import sys
-ka_path="e:/akshita_workspace/git_x"
+ka_path="../.."
 sys.path.insert(0, ka_path)
-from keras_aud import aud_audio, aud_model, aud_utils
+from keras_aud import aud_audio, aud_feature
+from keras_aud import aud_model, aud_utils
 
 # Make imports
 import csv
