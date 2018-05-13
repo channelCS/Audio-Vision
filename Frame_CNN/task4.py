@@ -44,14 +44,14 @@ model_type='Functional'   # Type of model
 model='TCNN'               # Name of model
 feature="logmel"          # Name of feature
 
-dropout1=0.25          # 1st Dropout
+dropout1=0.3          # 1st Dropout
 act1='tanh'              # 1st Activation
 act2='tanh'              # 2nd Activation
 act3='sigmoid'           # 3rd Activation
 
 input_neurons=400      # Number of Neurons
-epochs=20             # Number of Epochs
-batchsize=64       # Batch Size
+epochs=40             # Number of Epochs
+batchsize=112       # Batch Size
 num_classes=len(labels) # Number of classes
 filter_length=5      # Size of Filter
 nb_filter=128         # Number of Filters
