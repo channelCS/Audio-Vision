@@ -1,9 +1,7 @@
 # Audio - Vision
 [![license](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://github.com/channelCS/Summaries/blob/master/LICENSE) [![dep1](https://img.shields.io/badge/Theano-0.9+-blue.svg)](http://deeplearning.net/software/theano/) [![dep2](https://img.shields.io/badge/Keras-2.1+-blue.svg)](https://keras.io/) 
 
-```diff
-+ Implementation
-```
+<img src="https://placeholdit.co//i/130x30?&bg=4286f4&fc=ffffff&text=Implementations"> 
 
 ### Implementation and reviews of Audio & Computer vision related papers in `python`.
 
@@ -24,9 +22,9 @@
 [8] Exploring Models and Data for Image Question Answering [[paper](https://arxiv.org/pdf/1505.02074.pdf)][[Implementation](https://github.com/akshitac8/Summaries/tree/master/VIS-LSTM)]
 
 [9] Bottom-Up and Top-Down Attention for Image Captioning and Visual Question Answering [[paper](https://arxiv.org/pdf/1707.07998.pdf)][Implementation]
-```diff
-- Application
-```
+
+<img src="https://placeholdit.co//i/130x30?&bg=61e83c&fc=ffffff&text=Applications">
+
 ### Application Deployed using heroku and Flask with python and JS
 
 [1] Digit classifier [[Implementation](https://github.com/channelCS/mnist-cnn)] [[Application](https://github.com/channelCS/digit-identify)] 
