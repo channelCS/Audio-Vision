@@ -103,7 +103,7 @@ lrmodel.fit(train_x,train_y,batch_size=batchsize,epochs=epochs,verbose=1)
 
 ### Results
 
-We calculate `Equal Error Rate`, `Precision`,`Recall` and `F1-Score`. We use a `threshold = 0.4` and `macro` to get mean values.
+We calculate `Equal Error Rate`, `Precision`,`Recall` and `F1-Score`. We use a `threshold = 0.4` and `macro` to get mean values on **Evaluation** dataset.
  
 ```python
 truth,pred=test(lrmodel,meta_test_csv,model)
@@ -115,7 +115,7 @@ print "Recall %.2f"%r
 print "F1 score %.2f"%f
 ```
 
-- Evaluation:
+*Output:*
 ```
 EER 0.18
 Precision 0.72
