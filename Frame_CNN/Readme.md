@@ -115,7 +115,11 @@ print "Recall %.2f"%r
 print "F1 score %.2f"%f
 ```
 
-- Dev :
-- Eva: 
-
+- Evaluation:
+```
+EER 0.18
+Precision 0.72
+Recall 0.38
+F1 score 0.44
+```
 ### References
