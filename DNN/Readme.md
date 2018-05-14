@@ -103,7 +103,8 @@ print "Accuracy %.2f prcnt"%acc
 ```
 *Output:*
 ```
-Accuracy 83.3%
+Accuracy 86.15%
+- in just 10 epochs
 
 ```
 
