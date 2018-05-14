@@ -111,12 +111,12 @@ truth,pred=test(lrmodel,meta_test_csv,model)
 eer=aud_utils.calculate_eer(truth,pred)
 p,r,f=aud_utils.prec_recall_fvalue(pred,truth,0.4,'macro')
 print "EER %.2f"%eer
-print "Precision %.2f"%p
-print "Recall %.2f"%r
-print "F1 score %.2f"%f
 ```
 
-- Dev :
-- Eva: 
+Output:*
+```
+EER 0.14
+
+```
 
 ### References
