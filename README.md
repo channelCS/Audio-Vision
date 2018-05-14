@@ -29,20 +29,20 @@
 ```
 ### Application Deployed using heroku and Flask with python and JS
 
-[1] Digit classifier [[implementation](https://github.com/channelCS/mnist-cnn)] [[Application](https://github.com/channelCS/digit-identify)] 
+[1] Digit classifier [[Implementation](https://github.com/channelCS/mnist-cnn)] [[Application](https://github.com/channelCS/digit-identify)] 
 
 [2] MNIST Random Digit Regenerator [[Paper](https://arxiv.org/pdf/1504.07225.pdf)] [[Implementation](https://github.com/GauravBh1010tt/DeepLearn/tree/master/CorrNet)] [[Application](https://github.com/channelCS/image-generate)]
 
 ### FeedBack
 
-All kind of feedback (code style, bugs, comments etc.) is welcome. Please open an issue on this Reposistory.
+All kind of feedback (code style, bugs, comments etc.) is welcome. Please open an [Issue](https://github.com/channelCS/Summaries/issues) on this Repository.
 
 ### Contribution Guidelines
 
-If you are familiar with basics of contributing to github reposistories, feel free to skip this section. For total beginners who landed up here before reading anything about this. Take a look at the [blog-post](https://channelcs.github.io/open-source-data-visualization.html) to get started.
+If you are familiar with basics of contributing to github reposistories, feel free to skip this section. For total beginners who landed up here before reading anything about this. Take a look at the [blog-post](https://channelcs.github.io/best-practices-in-a-collaborative-environment.html) to get started.
 
 ### Team Roles
 
 Aditya Arora  : Code Environments, Structuring, Dynamic Description, logics, feature logistics.
 
-Akshita Gupta : Paper Selections, Understanding Theoritical concepts , Model Descriptions.
+Akshita Gupta : Paper Selections, Understanding Theoretical concepts, Model Descriptions.
