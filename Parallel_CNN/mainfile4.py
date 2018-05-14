@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Apr 17 03:37:44 2018
+Created on Fri May 11 12:14:29 2018
 
-@author: adityac8
+@author: @akshitac8
 """
+
+# -*- coding: utf-8 -*-
 
 import warnings
 warnings.simplefilter("ignore")
@@ -22,13 +24,17 @@ from sklearn.cross_validation import KFold
 
 ## SET PATHS ACCORDING TO WHERE DATA SHOULD BE STORED
  
-wav_dev_fd   = ka_path+'/chime_data_rr/audio/dev'
-wav_eva_fd   = ka_path+'/chime_data_rr/audio/eva'
-dev_fd       = ka_path+'/chime_data_rr/features/dev'
-eva_fd       = ka_path+'/chime_data_rr/features/eva'
-meta_train_csv  = ka_path+'/chime_data_rr/texts/meta_csvs/development_chunks_raw.csv'
-meta_test_csv   = ka_path+'/chime_data_rr/texts/meta_csvs/evaluation_chunks_refined.csv' #eva_csv_path
-label_csv       = ka_path+'/chime_data_rr/texts/label_csvs'
+# This is where all audio files reside and features will be extracted
+audio_ftr_path='E:/akshita_workspace/git_x/'
+
+# We now tell the paths for audio, features and texts.
+wav_dev_fd   = audio_ftr_path+'chime_data/audio/dev'
+wav_eva_fd   = audio_ftr_path+'chime_data/audio/eva'
+dev_fd       = audio_ftr_path+'chime_data/features/dev'
+eva_fd       = audio_ftr_path+'chime_data/features/eva'
+meta_train_csv  = ka_path+'/keras_aud/utils/dcase16_task4/meta_csvs/development_chunks_refined.csv'
+meta_test_csv   = ka_path+'/keras_aud/utils/dcase16_task4/meta_csvs/evaluation_chunks_refined.csv'
+label_csv       = ka_path+'/keras_aud/utils/dcase16_task4/label_csvs'
 
 labels = [ 'c', 'm', 'f', 'v', 'p', 'b', 'o', 'S' ]
 
@@ -41,17 +47,17 @@ prep='eval'               # Which mode to use
 folds=2                   # Number of folds
 #Parameters that are passed to the model.
 model_type='Functional'   # Type of model
-model='TCNN'               # Name of model
-feature="logmel"          # Name of feature
+model='CNN'               # Name of model
+feature="cqt"          # Name of feature
 
-dropout1=0.3          # 1st Dropout
-act1='tanh'              # 1st Activation
-act2='tanh'              # 2nd Activation
+dropout1=0.1          # 1st Dropout
+act1='relu'              # 1st Activation
+act2='relu'              # 2nd Activation
 act3='sigmoid'           # 3rd Activation
 
-input_neurons=400      # Number of Neurons
-epochs=40             # Number of Epochs
-batchsize=112       # Batch Size
+input_neurons=500      # Number of Neurons
+epochs=2             # Number of Epochs
+batchsize=100       # Batch Size
 num_classes=len(labels) # Number of classes
 filter_length=5      # Size of Filter
 nb_filter=128         # Number of Filters
@@ -64,20 +70,19 @@ print "Input Neurons",input_neurons
 print "Epochs",epochs
 print "Batchsize",batchsize
 print "Number of filters",nb_filter
-print "Activations",act1,act2,act3
 
-## UNPACK THE DATASET ACCORDING TO KERAS_AUD
-
-# [NEEDED AT INITIAL STAGE]
-path='E:/akshita_workspace/chime_home'
-# [NEEDED AT INITIAL STAGE]
-#aud_utils.unpack_chime_2k16(path,wav_dev_fd,wav_eva_fd,meta_train_csv,meta_test_csv,label_csv)
+dataset = 'chime_2016'
+extract = False
+unpack  = False
+## UNPACK THE DATASET ACCORDING TO KERAS_AUD [NEEDED AT INITIAL STAGE]
+if unpack:
+    path='' #path to chime_home directory    
+    aud_utils.unpack_chime_2k16(path,wav_dev_fd,wav_eva_fd,meta_train_csv,meta_test_csv,label_csv)
 
 ## EXTRACT FEATURES
-
-#aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'defaults.yaml',dataset='chime_2016')
-#aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'defaults.yaml',dataset='chime_2016')
-
+if extract:
+    aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example.yaml',dataset=dataset)
+    aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example.yaml',dataset=dataset)
 
 def GetAllData(fe_fd, csv_file, agg_num, hop):
     """
@@ -107,11 +112,7 @@ def GetAllData(fe_fd, csv_file, agg_num, hop):
         y = np.zeros( len(labels) )
         for ch in tags:
             y[ lb_to_id[ch] ] = 1
-        try:
-            X = cPickle.load( open( path, 'rb' ) )
-        except Exception as e:
-            print 'Error while parsing',path
-            continue
+        X = aud_feature.load(path)
         # reshape data to (n_block, n_time, n_freq)
         i+=1
         X3d = aud_utils.mat_2d_to_3d( X, agg_num, hop )
@@ -181,9 +182,11 @@ if prep=='dev':
     cross_validation=True
 else:
     cross_validation=False
-
-nb_filter     = [50    , 100]    
-miz=aud_model.Functional_Model(model=model,dimx=dimx,dimy=dimy,num_classes=num_classes,act1=act1,act2=act2,act3=act3,nb_filter = nb_filter,dropout=dropout1)
+    
+miz=aud_model.Functional_Model(input_neurons=input_neurons,cross_validation=cross_validation,dropout1=dropout1,
+    act1=act1,act2=act2,act3=act3,nb_filter = nb_filter, filter_length=filter_length,
+    num_classes=num_classes,
+    model=model,dimx=dimx,dimy=dimy)
 
 np.random.seed(68)
 if cross_validation:
@@ -238,6 +241,7 @@ else:
     eer=aud_utils.calculate_eer(truth,pred)
     
     p,r,f=aud_utils.prec_recall_fvalue(pred,truth,0.4,'macro')
+    
     print "EER %.2f"%eer
     print "Precision %.2f"%p
     print "Recall %.2f"%r

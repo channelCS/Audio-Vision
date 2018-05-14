@@ -2,7 +2,7 @@
 """
 Created on Tue May 08 13:48:37 2018
 
-@author: Akshita Gupta
+@author: @akshitac8
 """
 
 # -*- coding: utf-8 -*-
@@ -24,16 +24,19 @@ from sklearn.metrics import accuracy_score
 from sklearn.cross_validation import KFold
 from keras.utils import to_categorical
 
-wav_dev_fd   = ka_path+'/dcase_data/audio/dev'
-wav_eva_fd   = ka_path+'/dcase_data/audio/eva'
-dev_fd       = ka_path+'/dcase_data/features/dev/logmel'
-eva_fd       = ka_path+'/dcase_data/features/eva/logmel'
+## SET PATHS ACCORDING TO WHERE DATA SHOULD BE STORED
+ 
+# This is where all audio files reside and features will be extracted
+audio_ftr_path='E:/akshita_workspace/git_x/'
+
+# We now tell the paths for audio, features and texts.
+wav_dev_fd   = audio_ftr_path+'dcase_data/audio/dev'
+wav_eva_fd   = audio_ftr_path+'dcase_data/audio/eva'
+dev_fd       = audio_ftr_path+'dcase_data/features/dev'
+eva_fd       = audio_ftr_path+'dcase_data/features/eva'
 label_csv    = '../utils/dcase_data/texts/dev/meta.txt'
 txt_eva_path = '../utils/dcase_data/texts/eva/test.txt'
 new_p        = '../utils/dcase_data/texts/eva/evaluate.txt'
-
-#aud_audio.extract('logmel', wav_dev_fd, dev_fd,'example.yaml')
-#aud_audio.extract('logmel', wav_eva_fd, eva_fd,'example.yaml')
 
 labels = [ 'bus', 'cafe/restaurant', 'car', 'city_center', 'forest_path', 'grocery_store', 'home', 'beach', 
             'library', 'metro_station', 'office', 'residential_area', 'train', 'tram', 'park' ]
@@ -63,6 +66,14 @@ nb_filter=100          # Number of Filters
 #Parameters that are passed to the features.
 agg_num=10             # Agg Number(Integer) Number of frames
 hop=10                 # Hop Length(Integer)
+
+dataset = 'dcase_2016'
+extract = False
+
+## EXTRACT FEATURES
+if extract:
+    aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example.yaml',dataset=dataset)
+    aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example.yaml',dataset=dataset)
 
 def GetAllData(fe_fd, csv_file, agg_num, hop):
     """

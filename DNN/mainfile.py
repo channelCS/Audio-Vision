@@ -2,7 +2,7 @@
 """
 Created on Tue May 08 17:13:52 2018
 
-@author: adityac8
+@author: @adityac8
 """
 
 # -*- coding: utf-8 -*-
@@ -25,6 +25,8 @@ from sklearn.metrics import accuracy_score
 from sklearn.cross_validation import KFold
 from keras.utils import to_categorical
 
+## SET PATHS ACCORDING TO WHERE DATA SHOULD BE STORED
+
 # This is where all audio files reside and features will be extracted
 audio_ftr_path='E:/akshita_workspace/git_x'
 
@@ -33,9 +35,9 @@ wav_dev_fd   = audio_ftr_path+'/dcase_data/audio/dev'
 wav_eva_fd   = audio_ftr_path+'/dcase_data/audio/eva'
 dev_fd       = audio_ftr_path+'/dcase_data/features/dev'
 eva_fd       = audio_ftr_path+'/dcase_data/features/eva'
-label_csv    = '../utils/dcase_data/texts/dev/meta.txt'
-txt_eva_path = '../utils/dcase_data/texts/eva/test.txt'
-new_p        = '../utils/dcase_data/texts/eva/evaluate.txt'
+label_csv    = ka_path+'/keras_aud/utils/dcase16_task1/dev/meta.txt'
+txt_eva_path = ka_path+'/keras_aud/utils/dcase16_task1/eva/test.txt'
+new_p        = ka_path+'/keras_aud/utils/dcase16_task1/eva/evaluate.txt'
 
 labels = [ 'bus', 'cafe/restaurant', 'car', 'city_center', 'forest_path', 'grocery_store', 'home', 'beach', 
             'library', 'metro_station', 'office', 'residential_area', 'train', 'tram', 'park' ]
@@ -63,9 +65,13 @@ num_classes=15            # Number of classes
 agg_num=10                # Number of frames
 hop=10                    # Hop Length
 
-#We extract audio features
-#aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example.yaml',dataset = 'dcase_2016')
-#aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example.yaml',dataset = 'dcase_2016')  
+dataset = 'dcase_2016'
+extract = False
+
+## EXTRACT FEATURES
+if extract:
+    aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example.yaml',dataset=dataset)
+    aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example.yaml',dataset=dataset)
 
 def GetAllData(fe_fd, csv_file):
     """

@@ -33,7 +33,7 @@ wav_eva_fd   = 'audio/eva'
 dev_fd       = 'features/dev'
 eva_fd       = 'features/eva'
 meta_train_csv  = ka_path+'/keras_aud/utils/dcase16_task4/meta_csvs/development_chunks_refined.csv'
-meta_test_csv   = ka_path+'/keras_aud/utils/dcase16_task4/meta_csvs/evaluation_chunks_refined.csv' #eva_csv_path
+meta_test_csv   = ka_path+'/keras_aud/utils/dcase16_task4/meta_csvs/evaluation_chunks_refined.csv'
 label_csv       = ka_path+'/keras_aud/utils/dcase16_task4/label_csvs'
 ```
 

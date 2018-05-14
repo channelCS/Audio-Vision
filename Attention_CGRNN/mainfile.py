@@ -2,7 +2,7 @@
 """
 Created on Fri May 11 12:14:29 2018
 
-@author: Akshita Gupta
+@author: @akshitac8
 """
 
 # -*- coding: utf-8 -*-
@@ -24,10 +24,14 @@ from sklearn.cross_validation import KFold
 
 ## SET PATHS ACCORDING TO WHERE DATA SHOULD BE STORED
  
-wav_dev_fd   = ka_path+'/chime_data_rr/audio/dev'
-wav_eva_fd   = ka_path+'/chime_data_rr/audio/eva'
-dev_fd       = ka_path+'/chime_data_rr/features/dev'
-eva_fd       = ka_path+'/chime_data_rr/features/eva'
+# This is where all audio files reside and features will be extracted
+audio_ftr_path='E:/akshita_workspace/git_x/'
+
+# We now tell the paths for audio, features and texts.
+wav_dev_fd   = audio_ftr_path+'chime_data/audio/dev'
+wav_eva_fd   = audio_ftr_path+'chime_data/audio/eva'
+dev_fd       = audio_ftr_path+'chime_data/features/dev'
+eva_fd       = audio_ftr_path+'chime_data/features/eva'
 meta_train_csv  = ka_path+'/keras_aud/utils/dcase16_task4/meta_csvs/development_chunks_refined.csv'
 meta_test_csv   = ka_path+'/keras_aud/utils/dcase16_task4/meta_csvs/evaluation_chunks_refined.csv'
 label_csv       = ka_path+'/keras_aud/utils/dcase16_task4/label_csvs'
@@ -67,18 +71,18 @@ print "Epochs",epochs
 print "Batchsize",batchsize
 print "Number of filters",nb_filter
 
-## UNPACK THE DATASET ACCORDING TO KERAS_AUD
-
-# [NEEDED AT INITIAL STAGE]
-path='E:/akshita_workspace/chime_home'
-# [NEEDED AT INITIAL STAGE]
-#aud_utils.unpack_chime_2k16(path,wav_dev_fd,wav_eva_fd,meta_train_csv,meta_test_csv,label_csv)
+dataset = 'chime_2016'
+extract = False
+unpack  = False
+## UNPACK THE DATASET ACCORDING TO KERAS_AUD [NEEDED AT INITIAL STAGE]
+if unpack:
+    path='' #path to chime_home directory    
+    aud_utils.unpack_chime_2k16(path,wav_dev_fd,wav_eva_fd,meta_train_csv,meta_test_csv,label_csv)
 
 ## EXTRACT FEATURES
-
-aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'defaults.yaml',dataset='chime_2016')
-aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'defaults.yaml',dataset='chime_2016')
-
+if extract:
+    aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example.yaml',dataset=dataset)
+    aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example.yaml',dataset=dataset)
 
 def GetAllData(fe_fd, csv_file, agg_num, hop):
     """
