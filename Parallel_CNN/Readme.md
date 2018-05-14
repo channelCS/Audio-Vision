@@ -23,7 +23,7 @@ sys.path.insert(0, ka_path)
 from keras_aud import aud_audio, aud_model, aud_utils
 ```
 
-### Give paths for audio, features, csvs
+### Give paths for audio, and features
 
 We now give paths where
 1. Audio is saved
@@ -40,12 +40,12 @@ eva_fd       = 'features/eva'
 
 ### Feature Extraction
 
-**Logarithmic Mel Filter Bank** We have used this feature due to **GIVE REASON**
+**Constant Q Transform** We have used this feature due to **GIVE REASON**
 
 Pass `extract = True` to unpack the dataset into folders.
 
 ```python
-aud_audio.extract('logmel', wav_dev_fd, dev_fd+'/logmel','yaml_file',dataset='dcase_2016')
+aud_audio.extract('cqt', wav_dev_fd, dev_fd+'/cqt','yaml_file',dataset='dcase_2016')
 ```
 
 ### Load Data
@@ -53,7 +53,7 @@ aud_audio.extract('logmel', wav_dev_fd, dev_fd+'/logmel','yaml_file',dataset='dc
 We now load the data and check their shape.
 
 ```python
-tr_X, tr_y = GetAllData( dev_fd+'/logmel', meta_train_csv)
+tr_X, tr_y = GetAllData( dev_fd+'/cqt', meta_train_csv)
 print(tr_X.shape)
 print(tr_y.shape)    
 ```
@@ -82,7 +82,7 @@ print(tr_X.shape)
 The model here uses mel bank features with Deep Neural Network.
 
 ```python
-miz=aud_model.Functional_Model(model='DNN',dimx=dimx,dimy=dimy,num_classes=15,act1='relu',act2='relu',act3='relu',act4='softmax')
+miz=aud_model.Functional_Model(model='CNN',dimx=dimx,dimy=dimy,num_classes=15,act1='relu',act2='relu',act3='softmax',input_neurons=500,dropout=0.25,nb_filter=100,filter_length=3)
 ```
 
 ### Training
@@ -169,7 +169,7 @@ print(tr_X.shape)
 The model here extracts feature maps using convolution layers followed by pooling and stacked recurrent layers(lstm/GRU). We create a class instance and save it in `miz`. We use `softmax` as the last activation because **GIVE REASON**
 
 ```python
-miz=aud_model.Functional_Model(model='CRNN',dimx=dimx,dimy=dimy,num_classes=15,act1='relu',act2='relu',act3='softmax')
+miz=aud_model.Functional_Model(model='TCNN',dimx=dimx,dimy=dimy,num_classes=15,act1='relu',act2='relu',act3='sigmoid',input_neurons=500,dropout=0.1,nb_filter=100,filter_length=3)
 ```
 
 ### Training

@@ -89,7 +89,7 @@ print(tr_X.shape)
 The Model here uses Deep-CNN with multiple layers to obtain feature maps which are followed by pooling and batch normalization.
 
 ```python
-miz=aud_model.Functional_Model(model='ACRNN',dimx=dimx,dimy=dimy,num_classes=15)
+miz=aud_model.Functional_Model(model='CNN',dimx=dimx,dimy=dimy,num_classes=15,input_neurons=400,dropout=0.1,nb_filter=100,filter_length=3)
 ```
 
 ### Training

@@ -87,10 +87,10 @@ print(tr_X.shape)
 
 ### Model
 
-The model here extracts feature maps using convolution layers followed by pooling and stacked recurrent layers(lstm/GRU). We create a class instance and save it in `miz`. We use `softmax` as the last activation because **GIVE REASON**
+The model here extracts feature maps using convolution layers followed by pooling and stacked recurrent layers(lstm/GRU). We create a class instance and save it in `miz`. We use `sigmoid` as the last activation because **GIVE REASON**
 
 ```python
-miz=aud_model.Functional_Model(model='CRNN',dimx=dimx,dimy=dimy,num_classes=15,act1='relu',act2='relu',act3='softmax')
+miz=aud_model.Functional_Model(model='CRNN',dimx=dimx,dimy=dimy,num_classes=15,act1='relu',act2='linear',act3='sigmoid')
 ```
 
 ### Training

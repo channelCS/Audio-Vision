@@ -183,7 +183,7 @@ if prep=='dev':
 else:
     cross_validation=False
     
-miz=aud_model.Functional_Model(input_neurons=input_neurons,cross_validation=cross_validation,dropout1=dropout1,
+miz=aud_model.Functional_Model(input_neurons=input_neurons,dropout1=dropout1,
     act1=act1,act2=act2,act3=act3,nb_filter = nb_filter, filter_length=filter_length,
     num_classes=num_classes,
     model=model,dimx=dimx,dimy=dimy)
