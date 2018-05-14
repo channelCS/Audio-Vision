@@ -101,6 +101,11 @@ truth,pred=test(lrmodel,txt_eva_path)
 acc=aud_utils.calculate_accuracy(truth,pred)
 print "Accuracy %.2f prcnt"%acc
 ```
+*Output:*
+```
+Accuracy 83.3%
+
+```
 
 
 ## References
