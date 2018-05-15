@@ -52,19 +52,20 @@ model_type='Functional'   # Can be Dynamic or Functional
 model='DNN'               # Name of model
 feature="logmel"          # Name of feature
 
-dropout1=0.2              # 1st Dropout
+dropout1=0.1              # 1st Dropout
 act1='relu'               # 1st Activation
-act2='relu'               # 2nd Activation
+act2='sigmoid'               # 2nd Activation
 act3='relu'            # 3rd Activation
 
-input_neurons=400         # Number of Neurons
-epochs=100                 # Number of Epochs
+input_neurons=500         # Number of Neurons
+epochs=10                 # Number of Epochs
 batchsize=100             # Batch Size
 num_classes=15            # Number of classes
 
 agg_num=10                # Number of frames
 hop=10                    # Hop Length
-
+loss='binary_crossentropy'
+optimizer='adam'
 dataset = 'dcase_2016'
 extract = False
 
@@ -166,7 +167,7 @@ else:
     
 miz=aud_model.Functional_Model(input_neurons=input_neurons,dropout=0.2,
     num_classes=num_classes,
-    model=model,dimx=dimx,dimy=dimy)
+    model=model,dimx=dimx,dimy=dimy,loss=loss,optimizer=optimizer)
 
 np.random.seed(68)
 if cross_validation:
