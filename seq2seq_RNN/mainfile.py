@@ -30,13 +30,13 @@ from keras.utils import to_categorical
 audio_ftr_path='E:/akshita_workspace/git_x/'
 
 # We now tell the paths for audio, features and texts.
-wav_dev_fd   = audio_ftr_path+'dcase_data/audio/dev'
-wav_eva_fd   = audio_ftr_path+'dcase_data/audio/eva'
-dev_fd       = audio_ftr_path+'dcase_data/features/dev'
-eva_fd       = audio_ftr_path+'dcase_data/features/eva'
-label_csv    = '../utils/dcase_data/texts/dev/meta.txt'
-txt_eva_path = '../utils/dcase_data/texts/eva/test.txt'
-new_p        = '../utils/dcase_data/texts/eva/evaluate.txt'
+wav_dev_fd   = audio_ftr_path+'/dcase_data/audio/dev'
+wav_eva_fd   = audio_ftr_path+'/dcase_data/audio/eva'
+dev_fd       = audio_ftr_path+'/dcase_data/features/dev/logmel'
+eva_fd       = audio_ftr_path+'/dcase_data/features/eva/logmel'
+label_csv    = ka_path+'/keras_aud/utils/dcase16_task1/dev/meta.txt'
+txt_eva_path = ka_path+'/keras_aud/utils/dcase16_task1/eva/test.txt'
+new_p        = ka_path+'/keras_aud/utils/dcase16_task1/eva/evaluate.txt'
 
 labels = [ 'bus', 'cafe/restaurant', 'car', 'city_center', 'forest_path', 'grocery_store', 'home', 'beach', 
             'library', 'metro_station', 'office', 'residential_area', 'train', 'tram', 'park' ]
