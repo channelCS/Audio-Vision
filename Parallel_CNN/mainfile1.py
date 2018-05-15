@@ -70,8 +70,8 @@ extract = False
 
 ## EXTRACT FEATURES
 if extract:
-    aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example.yaml',dataset=dataset)
-    aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example.yaml',dataset=dataset)
+    aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example1.yaml',dataset=dataset)
+    aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example1.yaml',dataset=dataset)
 
 def GetAllData(fe_fd, csv_file):
     """

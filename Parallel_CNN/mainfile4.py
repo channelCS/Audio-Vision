@@ -23,7 +23,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.cross_validation import KFold
 
 ## SET PATHS ACCORDING TO WHERE DATA SHOULD BE STORED
- 
+
 # This is where all audio files reside and features will be extracted
 audio_ftr_path='E:/akshita_workspace/git_x/'
 
@@ -35,7 +35,6 @@ eva_fd       = audio_ftr_path+'chime_data/features/eva'
 meta_train_csv  = ka_path+'/keras_aud/utils/dcase16_task4/meta_csvs/development_chunks_refined.csv'
 meta_test_csv   = ka_path+'/keras_aud/utils/dcase16_task4/meta_csvs/evaluation_chunks_refined.csv'
 label_csv       = ka_path+'/keras_aud/utils/dcase16_task4/label_csvs'
-
 labels = [ 'c', 'm', 'f', 'v', 'p', 'b', 'o', 'S' ]
 
 lb_to_id = { lb:id for id, lb in enumerate(labels) }
@@ -56,7 +55,7 @@ act2='relu'              # 2nd Activation
 act3='sigmoid'           # 3rd Activation
 
 input_neurons=500      # Number of Neurons
-epochs=2             # Number of Epochs
+epochs=10             # Number of Epochs
 batchsize=100       # Batch Size
 num_classes=len(labels) # Number of classes
 filter_length=5      # Size of Filter
@@ -81,9 +80,8 @@ if unpack:
 
 ## EXTRACT FEATURES
 if extract:
-    aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example.yaml',dataset=dataset)
-    aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example.yaml',dataset=dataset)
-
+    aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example4.yaml',dataset=dataset)
+    aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example4.yaml',dataset=dataset)
 def GetAllData(fe_fd, csv_file, agg_num, hop):
     """
     Input: Features folder(String), CSV file(String), agg_num(Integer), hop(Integer).
@@ -183,7 +181,7 @@ if prep=='dev':
 else:
     cross_validation=False
     
-miz=aud_model.Functional_Model(input_neurons=input_neurons,dropout1=dropout1,
+miz=aud_model.Functional_Model(input_neurons=input_neurons,dropout1=dropout1,cross_validation=cross_validation,
     act1=act1,act2=act2,act3=act3,nb_filter = nb_filter, filter_length=filter_length,
     num_classes=num_classes,
     model=model,dimx=dimx,dimy=dimy)
