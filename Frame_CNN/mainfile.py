@@ -21,7 +21,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.cross_validation import KFold
 
 ## SET PATHS ACCORDING TO WHERE DATA SHOULD BE STORED
- 
+
 # This is where all audio files reside and features will be extracted
 audio_ftr_path='E:/akshita_workspace/git_x/'
 
@@ -82,7 +82,7 @@ if unpack:
 if extract:
     aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example.yaml',dataset=dataset)
     aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example.yaml',dataset=dataset)
-
+	
 def GetAllData(fe_fd, csv_file, agg_num, hop):
     """
     Input: Features folder(String), CSV file(String), agg_num(Integer), hop(Integer).
