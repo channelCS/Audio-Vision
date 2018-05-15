@@ -48,22 +48,22 @@ folds=4                   # Number of folds
 save_model=False          # True if we want to save model
 model_type='Functional'   # Can be Dynamic or Functional
 model='CNN'               # Name of model
-feature="cqt"             # Name of feature
+feature="logmel"             # Name of feature
 
-dropout1=0.1              # 1st Dropout
+#dropout1=0.1              # 1st Dropout
 act1='relu'               # 1st Activation
 act2='relu'               # 2nd Activation
 act3='softmax'            # 3rd Activation
 
-input_neurons=400         # Number of Neurons
-epochs=2                  # Number of Epochs
-batchsize=128             # Batch Size
+#input_neurons=400         # Number of Neurons
+epochs=10                  # Number of Epochs
+#batchsize=128             # Batch Size
 num_classes=15            # Number of classes
-filter_length=3           # Size of Filter
-nb_filter=100             # Number of Filters
-
+#filter_length=3           # Size of Filter
+nb_filter=[128,256]             # Number of Filters
+pool_size=[(3,3),(2,2)]
 agg_num=10                # Number of frames
-hop=10                    # Hop Length
+hop=10                 # Hop Length
 
 dataset = 'dcase_2016'
 extract = False
@@ -122,7 +122,7 @@ def test(md,csv_file):
         names.append( li[0] )
         na = li[0][6:-4]
         #audio evaluation name
-        fe_path = eva_fd + '/' + na + '.f'
+        fe_path = eva_fd + '/' + feature + '/' + na + '.f'
         X0 = cPickle.load( open( fe_path, 'rb' ) )
         X0 = aud_utils.mat_2d_to_3d( X0, agg_num, hop )
         
@@ -164,11 +164,6 @@ if prep=='dev':
 else:
     cross_validation=False
     
-miz=aud_model.Functional_Model(input_neurons=input_neurons,dropout=dropout1,
-    act1=act1,act2=act2,act3=act3,nb_filter = nb_filter, filter_length=filter_length,
-    num_classes=num_classes,
-    model=model,dimx=dimx,dimy=dimy)
-
 np.random.seed(68)
 if cross_validation:
     kf = KFold(len(tr_X),folds,shuffle=True,random_state=42)
@@ -213,11 +208,29 @@ else:
     print "Evaluation mode"
     lrmodel=miz.prepare_model()
     train_y = to_categorical(train_y,num_classes=len(labels))
-        
-    #fit the model
-    lrmodel.fit(train_x,train_y,batch_size=batchsize,epochs=epochs,verbose=1)
-    
-    truth,pred=test(lrmodel,txt_eva_path)
+    # This method is applicable for functional model.
+	mydata=[]
 
-    acc=aud_utils.calculate_accuracy(truth,pred)
-    print "Accuracy %.2f prcnt"%acc
+	for drop in [0.1,0.2,0.25,0.3]:
+		for inp in [300,400,500,600]:
+			for bat in [64,100,128]:
+				for opt in ['adam','adadelta','rmsprop']:
+					for loss in ['binary_crossentropy','categorical_crossentropy']:
+						for length in [3,4,5]:
+							miz=aud_model.Functional_Model(pool_size=pool_size,input_neurons=inp,dropout=drop,
+													   act1=act1,act2=act2,act3=act3,nb_filter = nb_filter, filter_length=length,
+													   num_classes=num_classes,
+													   model=model,dimx=dimx,dimy=dimy,optimzer=opt,loss=loss)
+							lrmodel=miz.prepare_model()
+			
+							#fit the model
+							lrmodel.fit(train_x,train_y,batch_size=bat,epochs=epochs,verbose=1)
+		
+							truth,pred=test(lrmodel,txt_eva_path)
+							acc=aud_utils.calculate_accuracy(truth,pred)
+							print "Accuracy %.2f prcnt"%acc
+							mydata.append(" Dropout={}, length={}, BS={}, Optimizer={}, Loss={}, ACC={}\n".format(drop,length,bat,opt,loss,acc))
+
+	f=open('asd.txt','w')
+	f.write(str(mydata))
+	f.close()   
