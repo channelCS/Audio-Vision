@@ -2,11 +2,11 @@ logmel:
     fs:
     - 44100.  
     n_mels:
-    - 40
+    - 64
     fmin:
     - 0.
     fmax:
-    - 22050
+    - 22100
     mono:
     - True
     hamming_window:
@@ -24,7 +24,7 @@ mel:
     fs:
     - 44100.  
     n_mels:
-    - 40
+    - 64
     fmin:
     - 0.
     fmax:
