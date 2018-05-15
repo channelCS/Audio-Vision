@@ -91,6 +91,7 @@ Pass `prep = 'dev'` to train on train and evaluate on val, and `prep = 'eval'` t
 lrmodel=miz.prepare_model()
 lrmodel.fit(train_x,train_y,batch_size=100,epochs=10,verbose=1)    
 ```
+For **Hyperparameter tuning**, we use [Grid search](https://github.com/channelCS/keras_aud/blob/master/examples/grid_search.py) from keras_aud.
 
 ### Results
 
