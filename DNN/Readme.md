@@ -80,7 +80,7 @@ print(tr_X.shape)
 The model here uses mel bank features with Deep Neural Network.
 
 ```python
-miz=aud_model.Functional_Model(model='DNN',dimx=dimx,dimy=dimy,num_classes=15,act1='relu',act2='relu',act3='relu',act4='softmax',input_neurons=400,dropout=0.2)
+miz=aud_model.Functional_Model(model='DNN',dimx=dimx,dimy=dimy,num_classes=15,act1='relu',act2='sigmoid',act3='relu',act4='softmax',input_neurons=500,dropout=0.1)
 ```
 
 ### Training
@@ -89,7 +89,7 @@ Pass `prep = 'dev'` to train on train and evaluate on val, and `prep = 'eval'` t
 
 ```python
 lrmodel=miz.prepare_model()
-lrmodel.fit(train_x,train_y,batch_size=batchsize,epochs=epochs,verbose=1)    
+lrmodel.fit(train_x,train_y,batch_size=100,epochs=10,verbose=1)    
 ```
 
 ### Results
@@ -104,8 +104,6 @@ print "Accuracy %.2f prcnt"%acc
 *Output:*
 ```
 Accuracy 86.15%
-- in just 10 epochs
-
 ```
 
 
