@@ -81,8 +81,8 @@ if unpack:
 
 ## EXTRACT FEATURES
 if extract:
-    aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example.yaml',dataset=dataset)
-    aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example.yaml',dataset=dataset)
+    aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example.yaml',dataset='chime_2016')
+    aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example.yaml',dataset='chime_2016')
 
 def GetAllData(fe_fd, csv_file, agg_num, hop):
     """
@@ -182,7 +182,7 @@ if prep=='dev':
     cross_validation=True
 else:
     cross_validation=False
-    
+
 miz=aud_model.Functional_Model(num_classes=num_classes,model=model,dimx=dimx,dimy=dimy)
 
 np.random.seed(68)
@@ -238,6 +238,7 @@ else:
     eer=aud_utils.calculate_eer(truth,pred)
     
     p,r,f=aud_utils.prec_recall_fvalue(pred,truth,0.4,'macro')
+					 
     print "EER %.2f"%eer
     print "Precision %.2f"%p
     print "Recall %.2f"%r
