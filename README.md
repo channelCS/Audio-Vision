@@ -41,6 +41,6 @@ If you are familiar with basics of contributing to github reposistories, feel fr
 
 ### Team Roles
 
-Aditya Arora  : Code Environments, Structuring, Dynamic Description, logics, feature logistics.
+Aditya Arora  : Code Environments, Structuring, Dynamic Description, logics, feature logistics, Documentations.
 
 Akshita Gupta : Paper Selections, Understanding Theoretical concepts, Model Descriptions.
