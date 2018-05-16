@@ -194,8 +194,15 @@ print "Precision %.2f"%p
 print "Recall %.2f"%r
 print "F1 score %.2f"%f
 ```
+*Output:*
+```
+Mainfile1.py
+Accuracy: 84.5%
 
-- Dev :
-- Eva: 
+Mainfile2.py
+EER : 0.15
+
+```
+
 
 ### References
