@@ -40,7 +40,7 @@ eva_fd       = 'features/eva'
 
 ### Feature Extraction
 
-**Constant Q Transform** We have used this feature because it captures both frequency and time resolutions for low and high frequencies.
+**Constant Q Transform** and **LOG-MEL** We have used this combination of features for our model because it captures both frequency and time resolutions for low and high frequencies. Also, when the properties of Log-mel and cqt were combined an improvement is shown in the results. 
 
 Pass `extract = True` to unpack the dataset into folders.
 
@@ -131,7 +131,7 @@ aud_utils.unpack_chime_2k16('path/to/chime_home',wav_dev_fd,wav_eva_fd,meta_trai
 
 ### Feature Extraction
 
-**Constant Q Transform** 
+**Constant Q Transform** and **LOG-MEL** We have used this combination of features for our model because it captures both frequency and time resolutions for low and high frequencies. Also, when the properties of Log-mel and cqt were combined an improvement is shown in the results.
 
 Pass `extract = True` to unpack the dataset into folders.
 
@@ -207,4 +207,4 @@ EER : 0.15
 
 ### References
 
-[1] [Librosa](https://librosa.github.io/librosa/generated/librosa.core.cqt.html?highlight=cqt#librosa.core.cqt)
+[1] [Librosa](https://librosa.github.io)
