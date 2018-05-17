@@ -103,6 +103,11 @@ truth,pred=test(lrmodel,txt_eva_path)
 acc=aud_utils.calculate_accuracy(truth,pred)
 print "Accuracy %.2f prcnt"%acc
 ```
+*Output:*
+
+```
+Accuracy: 84.5%
+```
 
 ## Audio Tagging
 
@@ -196,10 +201,6 @@ print "F1 score %.2f"%f
 ```
 *Output:*
 ```
-Mainfile1.py
-Accuracy: 84.5%
-
-Mainfile2.py
 EER : 0.15
 
 ```
