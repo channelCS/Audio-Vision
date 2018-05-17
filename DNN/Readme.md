@@ -41,8 +41,10 @@ new_p        = ka_path+'/keras_aud/utils/dcase16_task1/eva/evaluate.txt'
 **Logarithmic Mel Filter Bank** We have used this feature to approximate the human ear's critical bandwidths. 
 Usually the formulas have this form:
 ```
-m = C.log.(1 + f/f<sub>o</sub>)
+m = C.log.(1 + f/f0)
 ```
+Below the frequency f0 the mel scale changes approximately linearly with frequency, whereas above f0 it changes logarithmically.
+
 
 Pass `extract = True` to unpack the dataset into folders.
 
@@ -99,7 +101,6 @@ For **Hyperparameter tuning**, we use [Grid search](https://github.com/channelCS
 
 ### Results
 
-We calculate `Accuracy` as the **FILL SOMETHING**.
  
 ```python
 truth,pred=test(lrmodel,txt_eva_path)
