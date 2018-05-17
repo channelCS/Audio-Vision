@@ -205,5 +205,6 @@ EER : 0.15
 
 ```
 
-
 ### References
+
+[1] [Librosa](https://librosa.github.io/librosa/generated/librosa.core.cqt.html?highlight=cqt#librosa.core.cqt)
