@@ -38,7 +38,11 @@ new_p        = ka_path+'/keras_aud/utils/dcase16_task1/eva/evaluate.txt'
 
 ### Feature Extraction
 
-**Logarithmic Mel Filter Bank** We have used this feature due to **GIVE REASON**
+**Logarithmic Mel Filter Bank** We have used this feature to approximate the human ear's critical bandwidths. 
+Usually the formulas have this form:
+```
+m = C.log.(1 + f/f<sub>o</sub>)
+```
 
 Pass `extract = True` to unpack the dataset into folders.
 
