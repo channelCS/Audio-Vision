@@ -47,7 +47,7 @@ aud_utils.unpack_chime_2k16('path/to/chime_home',wav_dev_fd,wav_eva_fd,meta_trai
 
 ### Feature Extraction
 
-**Normaized Mel Filter Bank range ~ [0,1]** We have used this feature due to **GIVE REASON**
+**Normaized Mel Filter Bank** We have used this as it increased the dynamic range of the feature scale.
 
 Pass `extract = True` to unpack the dataset into folders.
 
