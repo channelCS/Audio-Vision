@@ -46,7 +46,7 @@ aud_utils.unpack_chime_2k16('path/to/chime_home',wav_dev_fd,wav_eva_fd,meta_trai
 
 ### Feature Extraction
 
-**Constant Q Transform** We have used this feature due to **GIVE REASON FROM PAPER AND TRY LOGMEL AS WELL. ALSO UPDATE SHAPE AS PER CQT.**
+**LOGARITHM - MEL FILTER BANK** 
 
 Pass `extract = True` to unpack the dataset into folders.
 
@@ -65,7 +65,7 @@ print(tr_y.shape)
 ```
 *Output:*
 ```python
-(11676L, 10L, 40L)
+(11676L, 10L, 60L)
 (11676L, 8L)
 ```
 We take the last two dimensions which act as the `Input` shape for our `CNN` model.
@@ -81,7 +81,7 @@ print(tr_X.shape)
 ```
 *Output:*
 ```python
-(11676L, 1L, 10L, 40L)
+(11676L, 1L, 10L, 60L)
 ```
 
 ### Model
@@ -106,16 +106,13 @@ lrmodel.fit(train_x,train_y,batch_size=batchsize,epochs=epochs,verbose=1)
 We calculate `Equal Error Rate`, `Precision`,`Recall` and `F1-Score`. We use a `threshold = 0.4` and `macro` to get mean values.
  
 ```python
-truth,pred=test(lrmodel,meta_test_csv,model)
-eer=aud_utils.calculate_eer(truth,pred)
-p,r,f=aud_utils.prec_recall_fvalue(pred,truth,0.4,'macro')
-print "EER %.2f"%eer
-print "Precision %.2f"%p
-print "Recall %.2f"%r
-print "F1 score %.2f"%f
+truth,pred=test(lrmodel,txt_eva_path)
+acc=aud_utils.calculate_accuracy(truth,pred)
+print "Accuracy %.2f prcnt"%acc
 ```
-
-- Dev :
-- Eva: 
+*Output:*
+```
+Accuracy:
+```
 
 ### References
