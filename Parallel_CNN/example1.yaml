@@ -11,3 +11,26 @@ cqt:
     - 12
     window:
     - 'hamming'
+    
+mel:
+    fs:
+    - 44100.  
+    n_mels:
+    - 64
+    fmin:
+    - 0.
+    fmax:
+    - 22050
+    mono:
+    - True
+    hamming_window:
+    - 1024.
+    noverlap:
+    - 0
+    detrend:
+    - False
+    return_onesided:
+    - True
+    mode:
+    - 'magnitude'
+
