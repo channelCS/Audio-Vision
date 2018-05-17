@@ -40,7 +40,7 @@ eva_fd       = 'features/eva'
 
 ### Feature Extraction
 
-**Constant Q Transform** We have used this feature due to **GIVE REASON**
+**Constant Q Transform** We have used this feature because it captures both frequency and time resolutions for low and high frequencies.
 
 Pass `extract = True` to unpack the dataset into folders.
 
@@ -96,7 +96,7 @@ lrmodel.fit(train_x,train_y,batch_size=batchsize,epochs=epochs,verbose=1)
 
 ### Results
 
-We calculate `Accuracy` as the **FILL SOMETHING**.
+
  
 ```python
 truth,pred=test(lrmodel,txt_eva_path)
@@ -126,7 +126,7 @@ aud_utils.unpack_chime_2k16('path/to/chime_home',wav_dev_fd,wav_eva_fd,meta_trai
 
 ### Feature Extraction
 
-**Constant Q Transform** We have used this feature due to **GIVE REASON**
+**Constant Q Transform** 
 
 Pass `extract = True` to unpack the dataset into folders.
 
@@ -166,7 +166,7 @@ print(tr_X.shape)
 
 ### Model
 
-The model here extracts feature maps using convolution layers followed by pooling and stacked recurrent layers(lstm/GRU). We create a class instance and save it in `miz`. We use `softmax` as the last activation because **GIVE REASON**
+The model here extracts feature maps using convolution layers followed by pooling and stacked recurrent layers(lstm/GRU). We create a class instance and save it in `miz`. We use `softmax` as the last activation. 
 
 ```python
 miz=aud_model.Functional_Model(model='TCNN',dimx=dimx,dimy=dimy,num_classes=15,act1='relu',act2='relu',act3='sigmoid',input_neurons=500,dropout=0.1,nb_filter=100,filter_length=3)
