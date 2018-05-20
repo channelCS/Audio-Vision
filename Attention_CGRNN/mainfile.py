@@ -28,10 +28,10 @@ from sklearn.cross_validation import KFold
 audio_ftr_path='E:/akshita_workspace/git_x/'
 
 # We now tell the paths for audio, features and texts.
-wav_dev_fd   = audio_ftr_path+'chime_data/audio/dev'
-wav_eva_fd   = audio_ftr_path+'chime_data/audio/eva'
-dev_fd       = audio_ftr_path+'chime_data/features/dev'
-eva_fd       = audio_ftr_path+'chime_data/features/eva'
+wav_dev_fd   = audio_ftr_path+'chime_data_rr/audio/dev'
+wav_eva_fd   = audio_ftr_path+'chime_data_rr/audio/eva'
+dev_fd       = audio_ftr_path+'chime_data_rr/features/dev'
+eva_fd       = audio_ftr_path+'chime_data_rr/features/eva'
 meta_train_csv  = ka_path+'/keras_aud/utils/dcase16_task4/meta_csvs/development_chunks_refined.csv'
 meta_test_csv   = ka_path+'/keras_aud/utils/dcase16_task4/meta_csvs/evaluation_chunks_refined.csv'
 label_csv       = ka_path+'/keras_aud/utils/dcase16_task4/label_csvs'
@@ -50,20 +50,20 @@ model_type='Functional'   # Type of model
 model='ACRNN'               # Name of model
 feature="logmel"          # Name of feature
 
-dropout1=0.25          # 1st Dropout
-act1='relu'              # 1st Activation
-act2='sigmoid'              # 2nd Activation
-act3='sigmoid'           # 3rd Activation
+dropout1=[0.1,0.2]          # Dropout
+act1='tanh'                 # 1st Activation
+act2='linear'               # 2nd Activation
+act3='sigmoid'              # 3nd Activation
 
-input_neurons=400      # Number of Neurons
-epochs=2             # Number of Epochs
-batchsize=64       # Batch Size
-num_classes=len(labels) # Number of classes
-filter_length=5      # Size of Filter
-nb_filter=128         # Number of Filters
+input_neurons=300           # Number of Neurons
+epochs=10                   # Number of Epochs
+batchsize=128               # Batch Size
+num_classes=len(labels)     # Number of classes
+filter_length=4             # Size of Filter
+nb_filter=72                # Number of Filters
 #Parameters that are passed to the features.
-agg_num=10             # Agg Number(Integer) Number of frames
-hop=10                 # Hop Length(Integer)
+agg_num=10                  # Agg Number(Integer) Number of frames
+hop=10                      # Hop Length(Integer)
 
 print "Model Type",model_type
 print "Input Neurons",input_neurons
@@ -76,13 +76,13 @@ extract = False
 unpack  = False
 ## UNPACK THE DATASET ACCORDING TO KERAS_AUD [NEEDED AT INITIAL STAGE]
 if unpack:
-    path='' #path to chime_home directory    
+    path='E:/akshita_workspace' #path to chime_home directory    
     aud_utils.unpack_chime_2k16(path,wav_dev_fd,wav_eva_fd,meta_train_csv,meta_test_csv,label_csv)
 
 ## EXTRACT FEATURES
 if extract:
-    aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example.yaml',dataset='chime_2016')
-    aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example.yaml',dataset='chime_2016')
+    aud_audio.extract(feature, wav_dev_fd, dev_fd+'/'+feature,'example.yaml',dataset=dataset)
+    aud_audio.extract(feature, wav_eva_fd, eva_fd+'/'+feature,'example.yaml',dataset=dataset)
 
 def GetAllData(fe_fd, csv_file, agg_num, hop):
     """
@@ -182,8 +182,8 @@ if prep=='dev':
     cross_validation=True
 else:
     cross_validation=False
-
-miz=aud_model.Functional_Model(num_classes=num_classes,model=model,dimx=dimx,dimy=dimy)
+rnn_units=[20,20]
+miz=aud_model.Functional_Model(num_classes=num_classes,model=model,dimx=dimx,dimy=dimy,dropout=dropout1,filter_lenght=filter_length,act1=act1,act2=act2,nb_filter=nb_filter,rnn_units=rnn_units,act3=act3)
 
 np.random.seed(68)
 if cross_validation:
