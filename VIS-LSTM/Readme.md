@@ -1,1 +1,3 @@
-** The code is still in beta version and will be uploaded once complete.**
+** The code is still in beta version. **
+
+<img src='./vqa_github.png' />

@@ -1,11 +1,41 @@
-from __future__ import print_function
 import numpy as np
 import h5py
 import json
+import os
 from keras.utils import to_categorical
 
-def most_common(lst):
-    return max(set(lst), key=lst.count)
+
+def get_metadata(input_json):
+    meta_data = json.load(open(input_json, 'r'))
+    meta_data['ix_to_word'] = {str(word):int(i) for i,word in meta_data['ix_to_word'].items()}
+    return meta_data
+
+def prepare_embeddings(num_words, embedding_dim, metadata, embedding_matrix_filename, glove_path):
+    if os.path.exists(embedding_matrix_filename):
+        with h5py.File(embedding_matrix_filename) as f:
+            return np.array(f['embedding_matrix'])
+
+    print "Embedding Data..."  
+    embeddings_index = {}
+    with open(glove_path, 'r') as glove_file:
+        for line in glove_file:
+            values = line.split()
+            word = values[0]
+            coefs = np.asarray(values[1:], dtype='float32')
+            embeddings_index[word] = coefs
+
+    embedding_matrix = np.zeros((num_words, embedding_dim))
+    word_index = metadata['ix_to_word']
+
+    for word, i in word_index.items():
+        embedding_vector = embeddings_index.get(word)
+        if embedding_vector is not None:
+            embedding_matrix[i] = embedding_vector
+   
+    with h5py.File(embedding_matrix_filename, 'w') as f:
+        f.create_dataset('embedding_matrix', data=embedding_matrix)
+
+    return embedding_matrix
 
 def right_align(seq,lengths):
     v = np.zeros(np.shape(seq))
@@ -14,7 +44,7 @@ def right_align(seq,lengths):
         v[i][N-lengths[i]:N]=seq[i][0:lengths[i]]
     return v
 
-def anat_data(input_img_h5, input_ques_h5, data_limit=215359):
+def get_train_data(input_img_h5, input_ques_h5, data_limit=215359):
     img_data = h5py.File(input_img_h5)
     ques_data = h5py.File(input_ques_h5)
   
@@ -37,7 +67,7 @@ def anat_data(input_img_h5, input_ques_h5, data_limit=215359):
 
     return train_X, train_y
 
-def get_val_data(input_img_h5, input_ques_h5,metadata,val_annotations_path):
+def get_test_data(input_img_h5, input_ques_h5,metadata,val_annotations_path):
     img_data = h5py.File(input_img_h5)
     ques_data = h5py.File(input_ques_h5)
     with open(val_annotations_path, 'r') as an_file:
@@ -74,110 +104,4 @@ def get_val_data(input_img_h5, input_ques_h5,metadata,val_annotations_path):
     for i,_ in enumerate(multi_val_y):
         multi_val_y[i] = [1 if ans in [None, 1000] else ans for ans in _]
 
-    return val_X, abs_val_y
-
-def get_train_data(input_json, input_img_h5, input_ques_h5, img_vec_dim,img_norm):
-
-    dataset = {}
-    train_data = {}
-    # load json file
-    print('loading json file...')
-    with open(input_json) as data_file:
-        data = json.load(data_file)
-    for key in data.keys():
-        dataset[key] = data[key]
-
-    # load image feature
-    print('loading image feature...')
-    with h5py.File(input_img_h5,'r') as hf:
-        # -----0~82459------
-        tem = hf.get('images_train')
-        img_feature = np.array(tem)
-    
-    # load h5 file
-    print('loading h5 file...')
-    with h5py.File(input_ques_h5,'r') as hf:
-        # total number of training data is 215375
-        # question is (26, )
-        tem = hf.get('ques_train')
-        train_data['question'] = np.array(tem)
-        # max length is 23
-        tem = hf.get('ques_length_train')
-        train_data['length_q'] = np.array(tem)
-        # total 82460 img
-        #-----1~82460-----
-        tem = hf.get('img_pos_train')
-        # convert into 0~82459
-        train_data['img_list'] = np.array(tem)[:215359]
-        
-        # answer is 1~1000
-        tem = hf.get('answers')
-        train_data['answers'] = np.array(tem)-1
-        
-        tem = np.sqrt(np.sum(np.multiply(img_feature, img_feature)))
-        img_feature = np.divide(img_feature, np.tile(tem,(1,4096)))
-
-    return dataset, img_feature, train_data
-
-
-
-def get_test_data(input_json,input_img_h5,input_ques_h5,img_vec_dim,ans_file,img_norm):
-    dataset = {}
-    test_data = {}
-    # load json file
-    print('loading json file...')
-    with open(input_json) as data_file:
-        data = json.load(data_file)
-    for key in data.keys():
-        dataset[key] = data[key]
-
-    # load image feature
-    print('loading image feature...')
-    with h5py.File(input_img_h5,'r') as hf:
-        # -----0~82459------
-        tem = hf.get('images_test')
-        img_feature = np.array(tem)
-    # load h5 file
-    print('loading h5 file...')
-    with h5py.File(input_ques_h5,'r') as hf:
-        # total number of training data is 215375
-        # question is (26, )
-        tem = hf.get('ques_test')
-        test_data['question'] = np.array(tem)
-        # max length is 23
-        tem = hf.get('ques_length_test')
-        test_data['length_q'] = np.array(tem)
-        # total 82460 img
-        # -----1~82460-----
-        tem = hf.get('img_pos_test')
-        # convert into 0~82459
-        test_data['img_list'] = np.array(tem)[:215359]-1
-        # quiestion id
-        tem = hf.get('question_id_test')
-        test_data['ques_id'] = np.array(tem)
-        # MC_answer_test
-        tem = hf.get('MC_ans_test')
-        test_data['MC_ans_test'] = np.array(tem)
-
-        tem =  np.sqrt(np.sum(np.multiply(img_feature, img_feature)))
-        img_feature = np.divide(img_feature, np.tile(tem,(1,img_vec_dim)))
-
-
-    # Added by Adi, make sure the ans_file is provided
-    nb_data_test = len(test_data[u'question'])
-    val_all_answers_dict = json.load(open(ans_file))
-    val_answers = np.zeros(nb_data_test, dtype=np.int32)
-
-    ans_to_ix = {v: k for k, v in dataset[u'ix_to_ans'].items()}
-    count_of_not_found = 0
-    for i in xrange(nb_data_test):
-        qid = test_data[u'ques_id'][i]
-        try : 
-            val_ans_ix =int(ans_to_ix[most_common(val_all_answers_dict[str(qid)])]) -1
-        except KeyError:
-            count_of_not_found += 1
-            val_ans_ix = 480
-        val_answers[i] = val_ans_ix
-    print("Beware: " + str(count_of_not_found) + " number of val answers are not really correct")
-
-    return dataset, img_feature, test_data, val_answers
+    return val_X, abs_val_y, multi_val_y
