@@ -1,7 +1,7 @@
 # Audio - Vision
-[![license](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://github.com/channelCS/Summaries/blob/master/LICENSE) [![dep1](https://img.shields.io/badge/Theano-0.9+-blue.svg)](http://deeplearning.net/software/theano/) [![dep2](https://img.shields.io/badge/Keras-2.1+-blue.svg)](https://keras.io/) 
+[![license](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://github.com/channelCS/Summaries/blob/master/LICENSE) [![dep1](https://img.shields.io/badge/Theano-0.9+-blue.svg)](http://deeplearning.net/software/theano/) [![dep2](https://img.shields.io/badge/Keras-2.1+-red.svg)](https://keras.io/) 
 
-<img src="https://placeholdit.co//i/130x30?&bg=4286f4&fc=ffffff&text=Implementations"> 
+<img src="https://placeholdit.co//i/130x30?&bg=4286f4&fc=ffffff&text=Implementations" alt="Implementations" > 
 
 ### Implementation and reviews of Audio & Computer vision related papers in `python`.
 
@@ -20,7 +20,7 @@
 [7] Exploring Models and Data for Image Question Answering [[paper](https://arxiv.org/pdf/1505.02074.pdf)][[Implementation](https://github.com/akshitac8/Summaries/tree/master/VIS-LSTM)]
 
 
-<img src="https://placeholdit.co//i/130x30?&bg=61e83c&fc=ffffff&text=Applications">
+<img src="https://placeholdit.co//i/130x30?&bg=61e83c&fc=ffffff&text=Applications" alt="Applications">
 
 ### Application Deployed using heroku and Flask with python and JS
 
@@ -28,13 +28,13 @@
 
 [2] MNIST Random Digit Regenerator [[Paper](https://arxiv.org/pdf/1504.07225.pdf)] [[Implementation](https://github.com/GauravBh1010tt/DeepLearn/tree/master/CorrNet)] [[Application](https://github.com/channelCS/image-generate)]
 
-### FeedBack
+### Feedback
 
-All kind of feedback (code style, bugs, comments etc.) is welcome. Please open an [Issue](https://github.com/channelCS/Summaries/issues) on this Repository.
+All kinds of feedback (code style, bugs, comments etc.) is welcome. Please open an [Issue](https://github.com/channelCS/Summaries/issues) on this Repository.
 
 ### Contribution Guidelines
 
-If you are familiar with basics of contributing to github reposistories, feel free to skip this section. For total beginners who landed up here before reading anything about this. Take a look at the [blog-post](https://channelcs.github.io/best-practices-in-a-collaborative-environment.html) to get started.
+If you are familiar with basics of contributing to github repositories, feel free to skip this section. For total beginners who landed up here, before contributing, take a look at the [blog-post](https://channelcs.github.io/best-practices-in-a-collaborative-environment.html) to get started.
 
 ### Team Roles
 
@@ -44,7 +44,7 @@ Akshita Gupta : Paper Selections, Understanding Theoretical concepts, Model Desc
 
 ### Upcoming Uploads
 
-[1] Sequence to Sequence Autoencoders for Unsupervised Representation Learning From Audio [[Paper](https://www.cs.tut.fi/sgn/arg/dcase2017/documents/workshop_papers/DCASE2017Workshop_Amiriparian_172.pdf)][[Implementation](https://github.com/akshitac8/Summaries/tree/master/seq2seq_RNN)]
+[1] Sequence to Sequence Autoencoders for Unsupervised Representation Learning From Audio [[Paper](https://www.cs.tut.fi/sgn/arg/dcase2017/documents/workshop_papers/DCASE2017Workshop_Amiriparian_172.pdf)][[Implementation](./seq2seq_RNN)]
 
-[2] Bottom-Up and Top-Down Attention for Image Captioning and Visual Question Answering [[paper](https://arxiv.org/pdf/1707.07998.pdf)][Implementation]
+[2] Bottom-Up and Top-Down Attention for Image Captioning and Visual Question Answering [[paper](https://arxiv.org/pdf/1707.07998.pdf)]
 
