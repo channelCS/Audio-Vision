@@ -15,13 +15,10 @@
 
 [5] FrameCNN: A Weakly-Supervised Learning Framework for Frame-Wise Acoustic Event Detection and Classification [[Paper](https://www.cs.tut.fi/sgn/arg/dcase2017/documents/challenge_technical_reports/DCASE2017_Chou_102.pdf)][[Implementation](https://github.com/akshitac8/Summaries/tree/master/Frame_CNN)]
 
-[6] Sequence to Sequence Autoencoders for Unsupervised Representation Learning From Audio [[Paper](https://www.cs.tut.fi/sgn/arg/dcase2017/documents/workshop_papers/DCASE2017Workshop_Amiriparian_172.pdf)][[Implementation](https://github.com/akshitac8/Summaries/tree/master/seq2seq_RNN)]
+[6] Attention and Localization based on a Deep Convolutional Recurrent Model for Weakly Supervised Audio Tagging [[Paper](https://arxiv.org/pdf/1703.06052.pdf)][[Implementation](https://github.com/akshitac8/Summaries/tree/master/Attention_CGRNN)] 
 
-[7] Attention and Localization based on a Deep Convolutional Recurrent Model for Weakly Supervised Audio Tagging [[Paper](https://arxiv.org/pdf/1703.06052.pdf)][[Implementation](https://github.com/akshitac8/Summaries/tree/master/Attention_CGRNN)] 
+[7] Exploring Models and Data for Image Question Answering [[paper](https://arxiv.org/pdf/1505.02074.pdf)][[Implementation](https://github.com/akshitac8/Summaries/tree/master/VIS-LSTM)]
 
-[8] Exploring Models and Data for Image Question Answering [[paper](https://arxiv.org/pdf/1505.02074.pdf)][[Implementation](https://github.com/akshitac8/Summaries/tree/master/VIS-LSTM)]
-
-[9] Bottom-Up and Top-Down Attention for Image Captioning and Visual Question Answering [[paper](https://arxiv.org/pdf/1707.07998.pdf)][Implementation]
 
 <img src="https://placeholdit.co//i/130x30?&bg=61e83c&fc=ffffff&text=Applications">
 
@@ -44,3 +41,10 @@ If you are familiar with basics of contributing to github reposistories, feel fr
 Aditya Arora  : Code Environments, Structuring, Dynamic Description, logics, feature logistics, Documentations.
 
 Akshita Gupta : Paper Selections, Understanding Theoretical concepts, Model Descriptions.
+
+### Upcoming Uploads
+
+[1] Sequence to Sequence Autoencoders for Unsupervised Representation Learning From Audio [[Paper](https://www.cs.tut.fi/sgn/arg/dcase2017/documents/workshop_papers/DCASE2017Workshop_Amiriparian_172.pdf)][[Implementation](https://github.com/akshitac8/Summaries/tree/master/seq2seq_RNN)]
+
+[2] Bottom-Up and Top-Down Attention for Image Captioning and Visual Question Answering [[paper](https://arxiv.org/pdf/1707.07998.pdf)][Implementation]
+
