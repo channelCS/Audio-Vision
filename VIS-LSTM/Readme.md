@@ -10,6 +10,17 @@
 
 <img src='./vqa.PNG' />
 
+
+### Implemetation Details
+
+There are a total of five files(in order of running them)
+
+- **unpack_vqa.py**: For preprocessing of question data to get question features. (Alternatively, these could be downloaded as mentioned in data folder)
+- **extract_features.py**: For processing of image data, to get image features. (Alternatively, these could be downloaded as mentioned in data folder)
+- **get_data.py**: Process question and image features to get training and testing data.
+- **mainfile.py**: Paths to files are given here. Model is evaluated.
+- **my_models.py**: Contains the description of the models.
+
 ### Give paths for 
 
 We now give paths. For details, see [data](./data) directory.
