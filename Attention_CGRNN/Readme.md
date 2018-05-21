@@ -114,8 +114,11 @@ print "Precision %.2f"%p
 print "Recall %.2f"%r
 print "F1 score %.2f"%f
 ```
+* Output *
 
-- Dev :
-- Eva: 
+### Visualized Architecture
+<img src='./attention.png' width='700'/>
 
 ### References
+
+1. https://github.com/yongxuUSTC/att_loc_cgrnn
