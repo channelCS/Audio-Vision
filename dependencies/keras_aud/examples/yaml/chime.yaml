@@ -1,0 +1,133 @@
+mel:
+    fs:
+    - 16000.  
+    n_mels:
+    - 64
+    fmin:
+    - 0.
+    fmax:
+    - 22100
+    mono:
+    - True
+    hamming_window:
+    - 1024.
+    noverlap:
+    - 0
+    detrend:
+    - False
+    return_onesided:
+    - True
+    mode:
+    - 'magnitude'
+
+logmel:
+    fs:
+    - 16000.  
+    n_mels:
+    - 40
+    fmin:
+    - 0.
+    fmax:
+    - 8000.
+    mono:
+    - True
+    hamming_window:
+    - 1024.
+    noverlap:
+    - 0
+    detrend:
+    - False
+    return_onesided:
+    - True
+    mode:
+    - 'magnitude'
+
+cqt:
+    fs:
+    - 44100.  
+    hop_length:
+    - 512
+    n_bins:
+    - 120
+    mono:
+    - True
+    bins_per_octave:
+    - 24
+    window:
+    - 'hamming'
+    
+spectralcentroid:
+    fs:
+    - 44100.  
+    hop_length:
+    - 512
+    n_bins:
+    - 120
+    mono:
+    - True
+    bins_per_octave:
+    - 24
+    window:
+    - 'hamming'
+zcr:
+    fs:
+    - 44100.  
+    hop_length:
+    - 512
+    mono:
+    - True
+    frame_length:
+    - 1024
+    center:
+    - True
+    pad:
+    - False
+stft:
+    fs:
+    - 44100.  
+    hop_length:
+    - 512
+    mono:
+    - True
+    frame_length:
+    - 1024
+    center:
+    - True
+    window:
+    - 'hamming'
+    
+istft:
+    fs:
+    - 44100.  
+    hop_length:
+    - 512
+    mono:
+    - True
+    frame_length:
+    - 1024
+    center:
+    - True
+    window:
+    - 'hamming'
+    
+SpectralRolloff:
+    fs:
+    - 44100.  
+    hop_length:
+    - 512
+    mono:
+    - True
+    window:
+    - 'hamming'
+    hamming_window:
+    - 1024.
+    nperseg:
+    - 1024.
+    noverlap:
+    - 0
+    detrend:
+    - False
+    return_onesided:
+    - True
+    mode:
+    - 'magnitude'

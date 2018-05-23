@@ -1,0 +1,11 @@
+segmentname,CR_lounge_230110_1036.s300
+chunknumber,40
+framestart,7680000
+annotation_a1,cfmp
+session_a1,1.0
+annotation_a2,cfmov
+session_a2,5.0
+annotation_a3,cfmopv
+session_a3,2.0
+majorityvote,cfmopv
+chunkname,CR_lounge_230110_1036.s300_chunk40

@@ -1,0 +1,10 @@
+.ipynb_checkpoints/
+audiofiles/
+*.pyc
+*.f
+*.wav
+*.h5
+*.zip
+*.pdf
+*.ppt
+*.html
