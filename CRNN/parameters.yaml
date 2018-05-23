@@ -24,7 +24,7 @@ logmel:
     fs:
     - 16000.  
     n_mels:
-    - 40
+    - 64
     fmin:
     - 0.
     fmax:

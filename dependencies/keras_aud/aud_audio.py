@@ -13,7 +13,7 @@ import cPickle
 import modules as M
 import feature_description as F
 
-def call_ftr(feature_name,featx,wav_fd,fe_fd,print_arr,dataset):
+def call_ftr(feature_name,featx,wav_fd,fe_fd,library,print_arr,dataset):
     flag1 = True if 'names' in print_arr else False
     flag2 = True if 'shape' in print_arr else False
     try:
@@ -31,7 +31,7 @@ def call_ftr(feature_name,featx,wav_fd,fe_fd,print_arr,dataset):
     for na in names:
         path = wav_fd + '/' + na
         # Introduce features here
-        X=M.call_ftr_one(feature_name,featx,path,dataset)
+        X=M.call_ftr_one(feature_name,featx,path,library,dataset)
         if flag1:
             print(na)
         if flag2:
@@ -42,7 +42,7 @@ def call_ftr(feature_name,featx,wav_fd,fe_fd,print_arr,dataset):
 
 
 
-def extract(feature_name,wav_fd=None,fe_fd=None,yaml_file='',print_arr=[],dataset=None):
+def extract(feature_name,wav_fd=None,fe_fd=None,yaml_file='',library='wavread',print_arr=[],dataset=None):
     """
     This function extracts features from audio.
 
@@ -69,7 +69,7 @@ def extract(feature_name,wav_fd=None,fe_fd=None,yaml_file='',print_arr=[],datase
         except Exception as e:
             print("Make sure you add the {} to the YAML file".format(e))
             raise SystemExit
-        x=call_ftr(feature_name,featx,wav_fd,fe_fd,print_arr,dataset)
+        x=call_ftr(feature_name,featx,wav_fd,fe_fd,library,print_arr,dataset)
         print("Something wrong happened" if x==1000 else "Feature found")
     else:
         print("Invalid Feature Name")

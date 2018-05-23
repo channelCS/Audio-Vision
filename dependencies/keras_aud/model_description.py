@@ -427,6 +427,11 @@ def cbrnn(dimx,dimy,num_classes,**kwargs):
 
 
     print "Functional CBRNN"
+    print "Activation 1 {} 2 {} 3 {}".format(act1,act2,act3)
+    print "Dropout {}".format(dropout)
+    print "Kernels {} Size {} Poolsize {}".format(nb_filter,filter_length,pool_size)
+    print "Loss {} Optimizer {} Metrics {}".format(loss,optimizer,metrics)
+
     main_input = Input(shape=(1,dimx,dimy))
     x = Conv2D(filters=nb_filter,
                kernel_size=filter_length,
