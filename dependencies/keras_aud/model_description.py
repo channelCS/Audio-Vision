@@ -550,7 +550,7 @@ def transpose_cnn(dimx,dimy,num_classes,**kwargs):
     act1          = kwargs['kwargs'].get('act1','tanh')
     act2          = kwargs['kwargs'].get('act2','tanh')
     act3          = kwargs['kwargs'].get('act3','sigmoid')
-    nb_filter      = kwargs['kwargs'].get('nb_filter',[])
+    nb_filter      = kwargs['kwargs'].get('nb_filter',128)
     pool_size      = kwargs['kwargs'].get('pool_size',(1,2))
     dropout        = kwargs['kwargs'].get('dropout',0.1)
     print_sum      = kwargs['kwargs'].get('print_sum',False)
@@ -558,6 +558,8 @@ def transpose_cnn(dimx,dimy,num_classes,**kwargs):
     loss          = kwargs['kwargs'].get('loss','binary_crossentropy')
     optimizer     = kwargs['kwargs'].get('optimizer','adam')
     metrics       = kwargs['kwargs'].get('metrics','mse')
+    if type(nb_filter) is int:
+        nb_filter = [nb_filter] * 2
     inpx = Input(shape=(1,dimx,dimy),name='inpx')
     x = Conv2D(filters=nb_filter[0],
                kernel_size=5,
