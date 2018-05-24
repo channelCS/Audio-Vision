@@ -152,15 +152,18 @@ def cnn(dimx,dimy,num_classes,**kwargs):
     act2           = kwargs['kwargs'].get('act2','relu')
     act3           = kwargs['kwargs'].get('act3','softmax')
     dropout        = kwargs['kwargs'].get('dropout',0.1)
-    nb_filter      = kwargs['kwargs'].get('nb_filter',[])
+    nb_filter      = kwargs['kwargs'].get('nb_filter',128)
     filter_length  = kwargs['kwargs'].get('filter_length',3)
-    pool_size      = kwargs['kwargs'].get('pool_size',[])
+    pool_size      = kwargs['kwargs'].get('pool_size',2)
     print_sum      = kwargs['kwargs'].get('print_sum',False)
 
     loss          = kwargs['kwargs'].get('loss','categorical_crossentropy')
     optimizer     = kwargs['kwargs'].get('optimizer','adam')
     metrics       = kwargs['kwargs'].get('metrics','accuracy')
-
+    if type(nb_filter) is int:
+        nb_filter = [nb_filter] * 2
+    if type(pool_size) is int:
+        pool_size = [pool_size] * 2
     print "Model CNN"
     print "Activation 1 {} 2 {} 3 {}".format(act1,act2,act3)
     print "Neurons {} Dropout {}".format(input_neurons,dropout)
