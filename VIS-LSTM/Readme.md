@@ -102,7 +102,7 @@ print "true positive rate: ", np.float(true_positive)/len(pred_classes)
 ```
 *Output:*
 ```
-Accuracy 
+Accuracy : 44.5 % 
 
 ```
 
