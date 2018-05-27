@@ -6,6 +6,29 @@ from nltk.tokenize import word_tokenize
 import json
 import re
 
+import os
+def download_vqa():
+    os.system('wget http://visualqa.org/data/mscoco/vqa/Questions_Train_mscoco.zip -P zip/')
+    os.system('wget http://visualqa.org/data/mscoco/vqa/Questions_Val_mscoco.zip -P zip/')
+    os.system('wget http://visualqa.org/data/mscoco/vqa/Questions_Test_mscoco.zip -P zip/')
+
+    # Download the VQA Annotations
+    os.system('wget http://visualqa.org/data/mscoco/vqa/Annotations_Train_mscoco.zip -P zip/')
+    os.system('wget http://visualqa.org/data/mscoco/vqa/Annotations_Val_mscoco.zip -P zip/')
+
+
+    # Unzip the annotations
+    os.system('unzip zip/Questions_Train_mscoco.zip -d annotations/')
+    os.system('unzip zip/Questions_Val_mscoco.zip -d annotations/')
+    os.system('unzip zip/Questions_Test_mscoco.zip -d annotations/')
+    os.system('unzip zip/Annotations_Train_mscoco.zip -d annotations/')
+    os.system('unzip zip/Annotations_Val_mscoco.zip -d annotations/')
+
+
+download=False
+if download:
+    download_vqa()
+
 def tokenize(sentence):
     return [i for i in re.split(r"([-.\"',:? !\$#@~()*&\^%;\[\]/\\\+<>\n=])", sentence) if i!='' and i!=' ' and i!='\n'];
 
@@ -164,7 +187,7 @@ def get_unqiue_img(imgs):
 
 ############# DEFINE PATHS AND PARAMATERS ##########################
 imdir='%s/COCO_%s_%012d.jpg'
-q='D:/workspace/aditya_akshita/vqa/VQA_Keras/data/'
+q='./'
 imgs_train_path = q+'vqa_raw_train.json'
 imgs_test_path = q+'vqa_raw_test.json'
 token_method = 'other'
@@ -362,6 +385,6 @@ out = {}
 out['ix_to_word'] = itow # encode the (1-indexed) vocab
 out['ix_to_ans'] = itoa
 out['unique_img_train'] = unique_img_train
-out['uniuqe_img_test'] = unique_img_test
+out['unique_img_test'] = unique_img_test
 json.dump(out, open(output_json, 'w'))
 print 'wrote ', output_json
