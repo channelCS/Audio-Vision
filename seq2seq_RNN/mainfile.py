@@ -27,7 +27,7 @@ from keras.utils import to_categorical
 ## SET PATHS ACCORDING TO WHERE DATA SHOULD BE STORED
  
 # This is where all audio files reside and features will be extracted
-audio_ftr_path='E:/akshita_workspace/git_x/'
+audio_ftr_path='D:/workspace/aditya_akshita/temp'
 
 # We now tell the paths for audio, features and texts.
 wav_dev_fd   = audio_ftr_path+'/dcase_data/audio/dev'
@@ -68,7 +68,7 @@ agg_num=10             # Agg Number(Integer) Number of frames
 hop=10                 # Hop Length(Integer)
 
 dataset = 'dcase_2016'
-extract = False
+extract = 0
 
 ## EXTRACT FEATURES
 if extract:
@@ -153,23 +153,17 @@ def test(md,csv_file,new_p,model):
     truth.sort()
     return truth,pred
 
-def predict_sequence(encoder, decoder, source, n_steps, cardinality):
-    # encode
-    state = encoder.predict(source)
-    # start of sequence input
-    target_seq = np.array([0.0 for _ in range(cardinality)]).reshape(1, 1, cardinality)
-    # collect predictions
-    output = list()
-    for t in range(n_steps):
-        # predict next char
-        y, h, c = decoder.predict([target_seq] + state)
-        # store prediction
-        output.append(y[0,0,:])
-        # update state
-        state = [h, c]
-        # update target sequence
-        target_seq = y
-    return np.array(output)
+#def predict_sequence(encoder, decoder, source, n_steps, cardinality):
+#    state = encoder.predict(source)
+#    target_seq = np.array([0.0 for _ in range(n_steps*cardinality)]).reshape(1, n_steps,cardinality)
+#    print target_seq.shape
+#    output = list()
+#    for t in range(n_steps):
+#        y, h, c = decoder.predict([target_seq] + state)
+#        output.append(y[0,0,:])
+#        state = [h, c]
+#        target_seq = y
+#    return np.array(output)
 
 
 tr_X, tr_y = GetAllData( dev_fd, label_csv, agg_num, hop )
@@ -201,18 +195,17 @@ truth = open(new_p,'r').readlines()
 truth = [i.split('\t')[1]for i in truth]
 truth.sort()
 train_x=np.array(tr_X)
-target_data=train_x[::-1, :, ::-1]
+#target_data=train_x[::-1, :, ::-1]
 train_y=np.array(tr_y)
 train_y = to_categorical(train_y,num_classes=len(labels))
 lrmodel=miz.prepare_model()
-
 #fit the model
-lrmodel.fit(x=[train_x,train_x],y=target_data,batch_size=batchsize,epochs=epochs,verbose=1)
+lrmodel.fit(x=[train_x,train_x],y=train_x,batch_size=batchsize,epochs=1,verbose=1)
 bre
 #truth,pred=test(lrmodel,txt_eva_path,new_p,model)
-
-target = predict_sequence(encoder, decoder, X1, n_steps_out, n_features)
-
+target = predict_sequence(encoder, decoder, train_x, dimx, dimy)
+print target.shape
+bre
 acc=aud_utils.calculate_accuracy(truth,pred)
 print "Accuracy %.2f prcnt"%acc
 
