@@ -187,7 +187,7 @@ def get_unqiue_img(imgs):
 
 ############# DEFINE PATHS AND PARAMATERS ##########################
 imdir='%s/COCO_%s_%012d.jpg'
-q='./'
+q='data/'
 imgs_train_path = q+'vqa_raw_train.json'
 imgs_test_path = q+'vqa_raw_test.json'
 token_method = 'other'
