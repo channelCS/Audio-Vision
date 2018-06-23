@@ -1,4 +1,9 @@
 # Added support for python 3.6 with keras 
+"""
+Created on Tue May 08 19:06:33 2018
+
+author: Akshita Gupta
+"""
 from random import shuffle, seed
 import numpy as np
 import scipy.io
