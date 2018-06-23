@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+"""
+Created on Tue May 08 19:06:33 2018
+
+author: Akshita Gupta
+"""
 from keras.models import Sequential
 from keras.layers.core import Reshape, Activation, Dropout
 from keras.layers import Input, Dense, Embedding, Conv2D, MaxPool2D
