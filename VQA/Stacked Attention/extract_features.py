@@ -1,3 +1,8 @@
+"""
+Created on Tue May 08 19:06:33 2018
+
+author: Akshita Gupta
+"""
 from keras.applications.vgg19 import VGG19, preprocess_input
 from keras.models import Model
 from keras.layers import Input
