@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+"""
+Created on Tue May 08 19:06:33 2018
+
+author: Akshita Gupta
+"""
 from get_data import get_metadata, prepare_embeddings, get_train_data, get_test_data
 from my_models import deeper_lstm,visual_lstm
 import numpy as np
