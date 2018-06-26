@@ -21,6 +21,7 @@
 
 [7] Exploring Models and Data for Image Question Answering [[paper](https://arxiv.org/pdf/1505.02074.pdf)][[Implementation](https://github.com/akshitac8/Summaries/tree/master/VIS-LSTM)]
 
+[8] Stacked Attention Networks for Image Question Answering [[paper](https://arxiv.org/pdf/1511.02274.pdf)][[Implementation](https://github.com/channelCS/Audio-Vision/tree/master/VQA/Stacked%20Attention)]
 
 <img src="https://placeholdit.co//i/130x30?&bg=61e83c&fc=ffffff&text=Applications" alt="Applications">
 
