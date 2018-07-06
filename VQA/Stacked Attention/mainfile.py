@@ -5,14 +5,14 @@ Created on Tue May 08 19:06:33 2018
 author: Akshita Gupta
 """
 from get_data import get_metadata, prepare_embeddings, get_train_data, get_test_data
-from my_models import deeper_lstm,visual_lstm
+from my_models import san_atten
 import numpy as np
 
-root_path                 = 'E:/akshita_workspace/Audio-Vision/VIS-LSTM/data/'
+root_path                 = 'E:/akshita_workspace/cc/Audio-Vision/VQA/Stacked Attention/data/'
 val_file                  = root_path + 'mscoco_val2014_annotations.json'
 input_json                = root_path + 'vqa_data_prepro.json'   # Vocab and answers 
-input_img_train_h5        = root_path + 'data_img_train.h5'   #Images train features
-input_img_test_h5         = root_path + 'data_img_test.h5'   #Images test features
+input_img_train_h5        = root_path + 'img_train_2.h5'   #Images train features
+input_img_test_h5         = root_path + 'img_test_2.h5'   #Images test features
 input_ques_h5             = root_path + 'vqa_data_prepro.h5' #Question features
 
 
@@ -23,7 +23,7 @@ glove_path                = root_path + 'glove.6B.300d.txt'
 img_norm                  = 1
 nb_classes                = 1000
 optimizer                 = 'sgd'
-batch_size                = 300
+batch_size                = 20
 epochs                    = 4
 activation_1              = 'tanh'
 activation_2              = 'tanh'
@@ -41,12 +41,12 @@ num_attention_layers      = 1
 
 metadata=get_metadata(input_json)
 
-embedding_matrix = prepare_embeddings(vocabulary_size, word_emb_dim, metadata, embedding_matrix_filename, glove_path)
-
-san_atten(common_word_emb_dim,img_vec_dim, activation_1,activation_2, dropout, vocabulary_size,
+#embedding_matrix = prepare_embeddings(vocabulary_size, word_emb_dim, metadata, embedding_matrix_filename, glove_path)
+#print(embedding_matrix.shape)
+model= san_atten(common_word_emb_dim,img_vec_dim, activation_1,activation_2, dropout, vocabulary_size,
                 num_hidden_units_lstm, max_ques_length,
                 word_emb_dim, num_hidden_layers_mlp,
-                num_hidden_units_mlp, nb_classes, class_activation,embedding_matrix,filter_sizes,num_attention_layers)
+                num_hidden_units_mlp, nb_classes, class_activation,filter_sizes,num_attention_layers)
 model.compile(loss='categorical_crossentropy', optimizer=optimizer, metrics=['accuracy'])
 model.summary() # prints model layers with weights
 

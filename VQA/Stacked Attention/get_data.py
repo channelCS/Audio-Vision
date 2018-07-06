@@ -2,7 +2,7 @@
 import numpy as np
 import h5py
 import json
-import os
+import os,time
 from keras.utils import to_categorical
 
 
@@ -35,6 +35,8 @@ def prepare_embeddings(num_words, embedding_dim, metadata, embedding_matrix_file
    
     with h5py.File(embedding_matrix_filename, 'w') as f:
         f.create_dataset('embedding_matrix', data=embedding_matrix)
+    time.sleep(1)	
+    print(embedding_matrix.shape)
 
     return embedding_matrix
 
