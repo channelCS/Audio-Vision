@@ -1,17 +1,17 @@
 """
 Created on Sat Apr 08 11:48:18 2018
 
-author: @akshitac8 , @adityac8
+author: @akshitac8 
 """
 
 from keras.models import Model
 from keras.layers import Dense, Dropout, Flatten, Input
-from keras.layers import Conv2D, Conv2DTranspose, merge, Merge
-from keras.layers import BatchNormalization, Lambda,Activation,concatenate,RepeatVector,dot
+from keras.layers import Conv2D, Conv2DTranspose, merge
+from keras.layers import BatchNormalization, Lambda,Activation,Concatenate,RepeatVector,Dot,dot
 from keras.layers import LSTM, GRU, Reshape, Bidirectional, Permute,TimeDistributed
-from keras.layers import MaxPooling2D, AveragePooling2D, GlobalMaxPooling1D, GlobalAveragePooling2D
+from keras.layers import MaxPooling2D, AveragePooling2D, GlobalMaxPooling1D, GlobalMaxPooling2D, GlobalAveragePooling2D
 from keras.layers.merge import Multiply
-from keras import optimizers
+from keras import optimizers, metrics
 from keras import backend as K
 import numpy as np
 
@@ -72,27 +72,30 @@ def dnn(dimx,dimy,num_classes,**kwargs):
     act2          = kwargs['kwargs'].get('act2','relu')
     act3          = kwargs['kwargs'].get('act3','relu')
     act4          = kwargs['kwargs'].get('act4','softmax')
-    print_sum      = kwargs['kwargs'].get('print_sum',False)
+    print_sum     = kwargs['kwargs'].get('print_sum',False)
 
     loss          = kwargs['kwargs'].get('loss','binary_crossentropy')
     optimizer     = kwargs['kwargs'].get('optimizer','adam')
     metrics       = kwargs['kwargs'].get('metrics','accuracy')
-    print "Model DNN"
-    print "Activation 1 {} 2 {} 3 {} 4 {}".format(act1,act2,act3,act4)
-    print "Neurons {} Dropout {}".format(input_neurons,dropout)
-    print "Loss {} Optimizer {} Metrics {}".format(loss,optimizer,metrics)
-    input_dim = dimx * dimy
-    inpx = Input(shape=(input_dim,))
+    print("Model DNN")
+    print("Activation 1 {} 2 {} 3 {} 4 {}".format(act1,act2,act3,act4))
+    print("Neurons {} Dropout {}".format(input_neurons,dropout))
+    print("Loss {} Optimizer {} Metrics {}".format(loss,optimizer,metrics))
+#    input_dim = dimx * dimy
+#    inpx = Input(shape=(input_dim,))
+    base_model=seq2seq(dimx,dimy,num_classes,'seq2seq_weights.h5')
+    inpx=base_model.get_layer('dense_5').output
     x = Dense(input_neurons, activation=act1)(inpx)
     x = Dropout(dropout)(x)
-    x = Dense(input_neurons, activation=act2)(x)
+    x = Dense(input_neurons, activation=act1)(x)
     x = Dropout(dropout)(x)
     x = Dense(input_neurons, activation=act3)(x)
     x = Dropout(dropout)(x)
-    score = Dense(num_classes, activation=act4)(x)
-    model = Model([inpx],score)
+    score = Dense(num_classes, activation=act3)(x)
+    model = Model([base_model.input],score)
     if print_sum:
         model.summary()
+#    model.load_weights('seq2seq_weights.h5')
     model.compile(loss=loss,optimizer=optimizer,metrics=[metrics])
     
     return model
@@ -164,11 +167,11 @@ def cnn(dimx,dimy,num_classes,**kwargs):
         nb_filter = [nb_filter] * 2
     if type(pool_size) is int:
         pool_size = [pool_size] * 2
-    print "Model CNN"
-    print "Activation 1 {} 2 {} 3 {}".format(act1,act2,act3)
-    print "Neurons {} Dropout {}".format(input_neurons,dropout)
-    print "Kernels {} Size {} Poolsize {}".format(nb_filter,filter_length,pool_size)
-    print "Loss {} Optimizer {} Metrics {}".format(loss,optimizer,metrics)
+    print("Model CNN")
+    print("Activation 1 {} 2 {} 3 {}".format(act1,act2,act3))
+    print("Neurons {} Dropout {}".format(input_neurons,dropout))
+    print("Kernels {} Size {} Poolsize {}".format(nb_filter,filter_length,pool_size))
+    print("Loss {} Optimizer {} Metrics {}".format(loss,optimizer,metrics))
     inpx = Input(shape=(1,dimx,dimy),name='inpx')
     
     x = Conv2D(filters=nb_filter[0],
@@ -176,7 +179,6 @@ def cnn(dimx,dimy,num_classes,**kwargs):
                data_format='channels_first',
                padding='same',
                activation=act1)(inpx)
-
     hx = MaxPooling2D(pool_size=pool_size[0])(x)
     
     x = Conv2D(filters=nb_filter[1],
@@ -194,6 +196,7 @@ def cnn(dimx,dimy,num_classes,**kwargs):
     model = Model([inpx],score)
     if print_sum:
         model.summary()
+    model.load_weights('seq2seq_weights.h5')
     model.compile(loss=loss,optimizer=optimizer,metrics=[metrics])
     
     return model
@@ -246,16 +249,21 @@ def rnn(dimx,dimy,num_classes,**kwargs):
     act2          = kwargs['kwargs'].get('act2','relu')
     act3          = kwargs['kwargs'].get('act3','relu')
     act4          = kwargs['kwargs'].get('act4','sigmoid')
-    print_sum      = kwargs['kwargs'].get('print_sum',False)
+    print_sum     = kwargs['kwargs'].get('print_sum',False)
 
     loss          = kwargs['kwargs'].get('loss','categorical_crossentropy')
     optimizer     = kwargs['kwargs'].get('optimizer','adam')
     metrics       = kwargs['kwargs'].get('metrics','accuracy')
 
     
-    input_dim=dimx*dimy
-    main_input = Input(shape=(1,input_dim), name='main_input')
-    x = LSTM(rnn_units)(main_input)
+#    input_dim=dimx*dimy
+#    main_input = Input(shape=(input_dim,), name='main_input')
+    base_model=seq2seq(dimx,dimy,num_classes,'seq2seq_weights.h5')
+    inpx=base_model.get_layer('dense_5').output
+    x = Dense(input_neurons, activation=act1)(inpx)
+    a,b=kr(x)
+    x=Reshape((1,b))(x)
+    x = LSTM(rnn_units)(x)
 
     # We stack a deep densely-connected network on top
     x = Dense(input_neurons, activation=act1)(x)
@@ -264,9 +272,11 @@ def rnn(dimx,dimy,num_classes,**kwargs):
     
     # And finally we add the main logistic regression layer
     main_output = Dense(num_classes, activation=act4, name='main_output')(x)
-    model = Model(inputs=main_input, outputs=main_output)
+    model = Model(inputs=base_model.input, outputs=main_output)
     if print_sum:
         model.summary()
+    for layer in base_model.layers:
+        layer.trainable = False
     model.compile(loss=loss,
               optimizer=optimizer,
               metrics=[metrics])
@@ -341,6 +351,7 @@ def cnn_rnn(dimx,dimy,num_classes,**kwargs):
 
 
     main_input = Input(shape=(1,dimx,dimy))
+    
     x = Conv2D(filters=nb_filter,
                kernel_size=filter_length,
                data_format='channels_first',
@@ -414,26 +425,26 @@ def cbrnn(dimx,dimy,num_classes,**kwargs):
     -------
     CBRNN Model
     """
-    rnn_units     = kwargs['kwargs'].get('rnn_units',32)
+    rnn_units     = kwargs['kwargs'].get('rnn_units',64)
     act1          = kwargs['kwargs'].get('act1','relu')
     act2          = kwargs['kwargs'].get('act2','sigmoid')
     act3          = kwargs['kwargs'].get('act3','sigmoid')
     dropout        = kwargs['kwargs'].get('dropout',0.1)
     nb_filter      = kwargs['kwargs'].get('nb_filter',100)
-    filter_length  = kwargs['kwargs'].get('filter_length',3)
+    filter_length  = kwargs['kwargs'].get('filter_length',5)
     pool_size      = kwargs['kwargs'].get('pool_size',(2,2))
     print_sum      = kwargs['kwargs'].get('print_sum',False)
 
     loss          = kwargs['kwargs'].get('loss','binary_crossentropy')
     optimizer     = kwargs['kwargs'].get('optimizer','adam')
-    metrics       = kwargs['kwargs'].get('metrics','mse')
+    metrics       = kwargs['kwargs'].get('metrics','accuracy')
 
 
-    print "Functional CBRNN"
-    print "Activation 1 {} 2 {} 3 {}".format(act1,act2,act3)
-    print "Dropout {}".format(dropout)
-    print "Kernels {} Size {} Poolsize {}".format(nb_filter,filter_length,pool_size)
-    print "Loss {} Optimizer {} Metrics {}".format(loss,optimizer,metrics)
+#    print("Functional CBRNN")
+#    print("Activation 1 {} 2 {} 3 {}".format(act1,act2,act3))
+#    print("Dropout {}".format(dropout))
+#    print("Kernels {} Size {} Poolsize {}".format(nb_filter,filter_length,pool_size))
+#    print("Loss {} Optimizer {} Metrics {}".format(loss,optimizer,metrics))
 
     main_input = Input(shape=(1,dimx,dimy))
     x = Conv2D(filters=nb_filter,
@@ -527,7 +538,7 @@ def multi_cnn(dimx,dimy,num_classes,**kwargs):
         h = Flatten()(x)
         outs.append(h)
 
-    combine = Merge(mode='concat')(outs) 
+    combine = merge(mode='concat')(outs) 
     # And finally we add the main logistic regression layer    
     wrap = Dense(input_neurons, activation=act2,name='wrap')(combine)
     main_output = Dense(num_classes,activation=act3,name='score')(wrap)
@@ -601,55 +612,156 @@ def transpose_cnn(dimx,dimy,num_classes,**kwargs):
     return model
 
 ##################### Sequence2Sequence Model ############################
-def seq2seq(dimx,dimy,num_classes,**kwargs):
+    
+def sampling(args):
+        z_mean, z_log_var = args
+        epsilon = K.random_normal(shape=(K.shape(z_mean)[0], 2), mean=0.,
+                                  stddev=1.0)
+        return z_mean + K.exp(z_log_var / 2) * epsilon
+
+def seq2seq(dimx,dimy,num_classes,weights_path=None,**kwargs):
+    
+    
+    # input image dimensions
+#    img_rows, img_cols, img_chns = 10, 40, 1
+    # number of convolutional filters to use
+    filters = 64
+    # convolution kernel size
+    num_conv = 3
+    img_chns = 1
+    img_rows = 10
+    img_cols = 40
+    
+#    original_img_size = (img_chns, img_rows, img_cols)
+    latent_dim = 2
+    intermediate_dim = 128
+    batch_size=128
+    
+    
+    x = Input(shape=(1,dimx,dimy))
+    conv_1 = Conv2D(img_chns,
+                    kernel_size=(2, 2),
+                    padding='same', activation='relu')(x)
+    conv_2 = Conv2D(filters,
+                    kernel_size=(2, 2),
+                    padding='same', activation='relu',
+                    strides=(2, 2))(conv_1)
+    conv_3 = Conv2D(filters,
+                    kernel_size=num_conv,
+                    padding='same', activation='relu',
+                    strides=1)(conv_2)
+    conv_4 = Conv2D(filters,
+                    kernel_size=num_conv,
+                    padding='same', activation='relu',
+                    strides=1)(conv_3)
+    flat = Flatten()(conv_4)
+    hidden = Dense(intermediate_dim, activation='relu')(flat)
+    
+    z_mean = Dense(latent_dim)(hidden)
+    z_log_var = Dense(latent_dim)(hidden)
+    
+    # note that "output_shape" isn't necessary with the TensorFlow backend
+    # so you could write `Lambda(sampling)([z_mean, z_log_var])`
+    z = Lambda(sampling, output_shape=(latent_dim,))([z_mean, z_log_var])
+    
+    # we instantiate these layers separately so as to reuse them later
+    decoder_hid = Dense(intermediate_dim, activation='relu')
+    decoder_upsample = Dense(filters * 5 * 20, activation='relu')
+    
+    output_shape = (batch_size, filters, 5, 20)
+    
+    decoder_reshape = Reshape(output_shape[1:])
+    decoder_deconv_1 = Conv2DTranspose(filters,
+                                       kernel_size=num_conv,
+                                       padding='same',
+                                       strides=1,
+                                       activation='relu')
+    decoder_deconv_2 = Conv2DTranspose(filters,
+                                       kernel_size=num_conv,
+                                       padding='same',
+                                       strides=1,
+                                       activation='relu')
+    output_shape = (batch_size, filters, 11, 41)
+    decoder_deconv_3_upsamp = Conv2DTranspose(filters,
+                                              kernel_size=(3, 3),
+                                              strides=(2, 2),
+                                              padding='valid',
+                                              activation='relu')
+    decoder_mean_squash = Conv2D(img_chns,
+                                 kernel_size=2,
+                                 padding='valid',
+                                 activation='sigmoid')
+    
+    hid_decoded = decoder_hid(z)
+    up_decoded = decoder_upsample(hid_decoded)
+    reshape_decoded = decoder_reshape(up_decoded)
+    deconv_1_decoded = decoder_deconv_1(reshape_decoded)
+    deconv_2_decoded = decoder_deconv_2(deconv_1_decoded)
+    x_decoded_relu = decoder_deconv_3_upsamp(deconv_2_decoded)
+    x_decoded_mean_squash = decoder_mean_squash(x_decoded_relu)
+    
+    # instantiate VAE model
+    vae = Model(x, x_decoded_mean_squash)
+    
+    # define the loss function
+    xent_loss = img_rows * img_cols * metrics.binary_crossentropy(
+        K.flatten(x),
+        K.flatten(x_decoded_mean_squash))
+    kl_loss = - 0.5 * K.sum(1 + z_log_var - K.square(z_mean) - K.exp(z_log_var), axis=-1)
+    vae_loss = K.mean(xent_loss + kl_loss)
+    vae.add_loss(vae_loss)
+    
+    vae.compile(optimizer='adam')
+    
+    # load the data
     # Recurrent sequence to sequence learning auto encoders for audio classification task
     
     
-    print "seq2seq_lstm"
+    print("seq2seq_lstm")
     
-    ## encoder
-    encoder_input = Input(shape=(dimx,dimy))
-    
-    encoder=Bidirectional(LSTM(32,return_state=True))# Returns list of nos. of output states
-    encoder_outputs, forward_h, forward_c, backward_h, backward_c = encoder(encoder_input)
-    state_h = Concatenate(axis=1)([forward_h, backward_h])
-    state_c = Concatenate(axis=1)([forward_c, backward_c])
-    encoder_states = [state_h, state_c]
-    
-#    a,b = kr(encoder_outputs)
-#    x = Reshape((b,1))(encoder_outputs)
-    
-    
-    ## decoder
-    decoder_input = Input(shape=(dimx,dimy), name='main_input')
-    
-    decoder_lstm = LSTM(64, return_sequences=True, return_state=True)
-    decoder_outputs, _, _ = decoder_lstm(decoder_input,
-                                         initial_state=encoder_states)
-    #h=Flatten()(decoder_outputs)
-    decoder_dense = Dense(40, activation='softmax')
-    decoder_outputs=decoder_dense(decoder_outputs)
-    model = Model([encoder_input, decoder_input], decoder_outputs)
-    model.summary()
-    model.compile(loss='categorical_crossentropy',
-			  optimizer='adam',
-			  metrics=['accuracy'])
+#    ## encoder
+##    input_dim=dimx*dimy
+#    x = Input(shape=(dimx,dimy))
+#    # Encoder
+#    encoder=LSTM(64,return_state=True,return_sequences=True)
+#    encoder_outputs, forward_h, forward_c= encoder(x)
+##    state_h = Concatenate(axis=1)([forward_h, forward_c])
+##    state_c = Concatenate(axis=1)([forward_c, backward_c])
+#    encoder_states = [forward_h,forward_c]
+#    #hidden_1 = Dense(128, activation='relu')(encoder_outputs)
+#    #h = Dense(64, activation='relu')(hidden_1)
+#    
+#    # Decoder
+#    y = Input(shape=(dimx,dimy))
+#    decoder =LSTM(64, return_sequences=True, return_state=True)
+#    decoder_outputs, _, _ = decoder(y,
+#                                         initial_state=encoder_states)
+#    #hidden_2 = Dense(128, activation='relu')(decoder_outputs)
+##    r = Dense(128, activation='relu')(decoder_outputs)
+#    r = TimeDistributed(Dense(64, activation='tanh', name="Dense_tanh"))(decoder_outputs)
+#    r = TimeDistributed(Dense(dimy, activation="softmax"))(r)
 #
-#    ## encoder model 
-#    encoder_model = Model(encoder_input, encoder_states)
 #    
-#    ##decoder model
+##    attention = dot((2,2))([decoder, encoder])
+##    attention = dot([Dense(dimx)(encoder_outputs),Dense(dimy)(decoder_outputs)],axes=1)
+##    attention = Activation('softmax')(attention)
+##    
+##    context = Dot((2,1))([attention, encoder])
+##    decoder_combined_context = Concatenate(axis=-1)([context, decoder])
+##    
+##    # Has another weight + tanh layer as described in equation (5) of the paper
+##    output = TimeDistributed(Dense(64, activation="tanh"))(decoder_combined_context) # equation (5) of the paper
+##    output = TimeDistributed(Dense(dimy, activation="softmax"))(output)
 #    
-#    decoder_state_input_h = Input(shape=(64,))
-#    decoder_state_input_c = Input(shape=(64,))
-#    decoder_states_inputs = [decoder_state_input_h, decoder_state_input_c]
-#    decoder_outputs, state_h, state_c = decoder_lstm(
-#    decoder_input, initial_state=decoder_states_inputs)
-#    decoder_states = [state_h, state_c]
-#    decoder_outputs = decoder_dense(decoder_outputs)
-#    decoder_model = Model( [decoder_input] + decoder_states_inputs,[decoder_outputs] + decoder_states)
-#  
-    return model
+#    
+#    model = Model([x,y], r)
+#    if weights_path:
+#        model.load_weights(weights_path)
+#    model.summary()
+#    model.compile(optimizer='adadelta', loss='mse',metrics=['mse'])
+    
+    
+    return vae
 
 
 ####################### ATTENTION MODEL ACRNN ##################################
@@ -739,7 +851,7 @@ def dnn_dynamic(num_classes,input_dim,acts,**kwargs):
 
     
     if not np.all([len(acts)==dnn_layers]):
-        print "Layers Mismatch"
+        print("Layers Mismatch")
         return False
     x = Input(shape=(input_dim,),name='inpx')
     inpx = x
@@ -835,9 +947,9 @@ def cbrnn_dynamic(num_classes,dimx,dimy,acts,**kwargs):
     nb_filter     = kwargs['kwargs'].get('nb_filter',[])
     filter_length = kwargs['kwargs'].get('filter_length',[])
     #CNN with biderectional lstm
-    print "CBRNN"
+    print("CBRNN")
     if not np.all([len(acts)==cnn_layers,len(nb_filter)==cnn_layers,len(filter_length)==cnn_layers]):
-        print "Layers Mismatch"
+        print("Layers Mismatch")
         return False
     x = Input(shape=(1,dimx,dimy),name='inpx')
     inpx = x
