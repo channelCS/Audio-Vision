@@ -1,7 +1,7 @@
 """
 Created on Sat Apr 08 11:48:18 2018
 
-author: @akshitac8 
+author: @akshitac8, @adityac8
 """
 
 from keras.models import Model
