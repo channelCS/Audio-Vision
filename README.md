@@ -48,6 +48,8 @@ Aditya Arora  : Code Environments, Structuring, Dynamic Description, logics, fea
 
 Akshita Gupta : Paper Selections, Understanding Theoretical concepts, Model Descriptions.
 
+[![](https://sourcerer.io/fame/akshitac8/channelCS/Audio-Vision/images/0)](https://sourcerer.io/fame/akshitac8/channelCS/Audio-Vision/links/0)[![](https://sourcerer.io/fame/akshitac8/channelCS/Audio-Vision/images/1)](https://sourcerer.io/fame/akshitac8/channelCS/Audio-Vision/links/1)[![](https://sourcerer.io/fame/akshitac8/channelCS/Audio-Vision/images/2)](https://sourcerer.io/fame/akshitac8/channelCS/Audio-Vision/links/2)[![](https://sourcerer.io/fame/akshitac8/channelCS/Audio-Vision/images/3)](https://sourcerer.io/fame/akshitac8/channelCS/Audio-Vision/links/3)[![](https://sourcerer.io/fame/akshitac8/channelCS/Audio-Vision/images/4)](https://sourcerer.io/fame/akshitac8/channelCS/Audio-Vision/links/4)[![](https://sourcerer.io/fame/akshitac8/channelCS/Audio-Vision/images/5)](https://sourcerer.io/fame/akshitac8/channelCS/Audio-Vision/links/5)[![](https://sourcerer.io/fame/akshitac8/channelCS/Audio-Vision/images/6)](https://sourcerer.io/fame/akshitac8/channelCS/Audio-Vision/links/6)[![](https://sourcerer.io/fame/akshitac8/channelCS/Audio-Vision/images/7)](https://sourcerer.io/fame/akshitac8/channelCS/Audio-Vision/links/7)
+
 ### Upcoming Uploads
 
 [1] Bottom-Up and Top-Down Attention for Image Captioning and Visual Question Answering [[paper](https://arxiv.org/pdf/1707.07998.pdf)]
